@@ -67,42 +67,51 @@
     <script src="js/highcharts.js"></script>
 
     <script>
-      $(function () {
-        $('#container').highcharts({
-            chart: {type: 'column'},
-            credits: {enabled: false},
-            title: {text: 'Effect of deregulation'},
-            xAxis: {categories: ['Before', 'After']},
-            yAxis: {
-                min: 0,
-                title: {text: 'Money $'},
-            },
-            legend: {
-                align: 'right',
-                x: -70,
-                verticalAlign: 'top',
-                y: 20,
-                floating: true,
-                backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
-                borderColor: '#CCC',
-                borderWidth: 1,
-                shadow: false
-            },
-            tooltip: {enabled: false},
-            plotOptions: {
-                column: {
-                    stacking: 'normal',
-                }
-            },
-            series: [{
-                name: 'Interest',
-                data: [0, 40000]
-            }, {
-                name: 'Fees',
-                data: [30000, 100000]
-            }]
-        });
-    });
+      var chart = new Highcharts.Chart({
+        chart: {
+            renderTo: 'container',
+            type: 'column'
+        },
+        credits: {enabled: false},
+        title: {text: 'Effect of deregulation'},
+        xAxis: {categories: ['Before', 'After']},
+        yAxis: {
+            min: 0,
+            title: {text: 'Money $'},
+        },
+        legend: {
+            align: 'right',
+            x: -70,
+            verticalAlign: 'top',
+            y: 20,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
+            borderColor: '#CCC',
+            borderWidth: 1,
+            shadow: false
+        },
+        tooltip: {enabled: false},
+        plotOptions: {
+            column: {
+                stacking: 'normal',
+            }
+        },
+        series: [{
+            name: 'Interest',
+            data: [0, 40000]
+        }, {
+            name: 'Fees',
+            data: [30000, 100000]
+        }]
+      });
+
+      function updateChart(interest, fees) {
+        chart.series[0].setData(interest)
+        chart.series[1].setData(fees)
+      }
+
+    // updateChart([10000, 40000], [20000, 120000]);
+
     </script>
   </body>
 
