@@ -100,22 +100,20 @@ function getData() {
 function updateAll() {
   /* Compute costs and update chart */
   var data = getData();
-  var fees = 0.0;
-  var interest = 0.0;
-  var thisSemesterFees;
+  var oldDebt = 0.0;
+  var newDebt = 0.0;
 
-  // While Studying
-  for (var i = 0; i < 2*data['DegreeLength']; i++) {
-    thisSemesterFees = 1.;  // TODO
-    fees = (fees + thisSemesterFees)*Math.E ^ (0.5 * data['BondRate']);
-  }
+  var initialSemesterFees = 1.0;
 
-  // GapYear
-  fees = fees * Math.E ^ (data['GapYear'] * data['BondRate']);
+  var normalisedFees = initialSemesterFees * (1. + Math.exp(-0.5 * data['BondRate']));
+  var ratio = (1 + data['InflationRate']) * Math.exp(-data['BondRate']);
+  var normalisedDegreeCost = normalisedFees * (Math.pow(ratio, data['DegreeLength']) - 1) / (ratio - 1);
 
-  // Repayments
+  // Debts when you start work
+  var newDebt = normalisedDegreeCost * Math.exp(data['BondRate'] * (data['DegreeLength'] + data['GapYear'] - 11/12.));
+  var oldDebt = (initialSemesterFees * 2 * data['DegreeLength']) * Math.pow(1 + data['InflationRate'], data['DegreeLength'] + data['GapYear']);
 
-  updateChart([interest, interest], [fees, fees]);
+  console.log(oldDebt, newDebt);
 }
 
 updateAll();
