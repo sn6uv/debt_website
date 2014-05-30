@@ -131,39 +131,50 @@
         chart.series[1].setData(fees)
       }
 
-    // updateChart([10000, 40000], [20000, 120000]);
+      // updateChart([10000, 40000], [20000, 120000]);
 
-    /*    Setup Sliders    */
-    $('#InflationRateSlider').slider()
-      .on('slide', function(ev){
-        $('#InflationRateBox').val((ev.value/10.).toFixed(1) + " %");
+      /*    Setup Sliders    */
+      var InflationRateSlider = $('#InflationRateSlider').slider()
+      InflationRateSlider.on('slide', function(ev){
+          $('#InflationRateBox').val((ev.value/10.).toFixed(1) + " %");
       });
 
-    $('#BondRateSlider').slider()
-      .on('slide', function(ev){
-        $('#BondRateBox').val((ev.value/10.).toFixed(1) + " %");
-      });
+      var BondRateSlider = $('#BondRateSlider').slider()
+      BondRateSlider.on('slide', function(ev){
+          $('#BondRateBox').val((ev.value/10.).toFixed(1) + " %");
+        });
 
-    $('#DegreeLengthSlider').slider()
-      .on('slide', function(ev){
-        $('#DegreeLengthBox').val(ev.value);
-      });
+      var DegreeLengthSlider = $('#DegreeLengthSlider').slider()
+      DegreeLengthSlider.on('slide', function(ev){
+          $('#DegreeLengthBox').val(ev.value);
+        });
 
-    $('#GapYearSlider').slider()
-      .on('slide', function(ev){
-        $('#GapYearBox').val(ev.value);
-      });
+      var GapYearSlider = $('#GapYearSlider').slider()
+      GapYearSlider.on('slide', function(ev){
+          $('#GapYearBox').val(ev.value);
+        });
 
-    $('#StartingSalarySlider').slider()
-      .on('slide', function(ev){
-        $('#StartingSalaryBox').val("$" + ((ev.value >= 100) ? "" : " ") + ev.value.toString() + " K");
-      });
+      var StartingSalarySlider = $('#StartingSalarySlider').slider()
+      StartingSalarySlider.on('slide', function(ev){
+          $('#StartingSalaryBox').val("$" + ((ev.value >= 100) ? "" : " ") + ev.value.toString() + " K");
+        });
 
-    $('#SalaryIncreaseSlider').slider()
-      .on('slide', function(ev){
-        $('#SalaryIncreaseBox').val((ev.value/10.).toFixed(1) + " %");
-      });
+      var SalaryIncreaseSlider = $('#SalaryIncreaseSlider').slider()
+      SalaryIncreaseSlider.on('slide', function(ev){
+          $('#SalaryIncreaseBox').val((ev.value/10.).toFixed(1) + " %");
+        });
 
+      function getData() {
+        return {
+          'InflationRate': InflationRateSlider.data('slider').getValue() / 1000.,
+          'BondRate': BondRateSlider.data('slider').getValue() / 1000.,
+          'DegreeBand': 3, // TODO
+          'DegreeLength': DegreeLengthSlider.data('slider').getValue(),
+          'GapYear': GapYearSlider.data('slider').getValue(),
+          'StartingSalary': StartingSalarySlider.data('slider').getValue() * 1000,
+          'SalaryIncrease': SalaryIncreaseSlider.data('slider').getValue() / 1000,
+        };
+      }
     </script>
   </body>
 
