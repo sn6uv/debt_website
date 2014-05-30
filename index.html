@@ -14,9 +14,9 @@
 
     <div class="inputs" style="width: 400px;">
       <div class="input-group">
-        <span class="input-group-addon" style="width: 150px;">Interest Rate</span>
-        <!-- <input type="text" class="form-control"> -->
-        <input type="text" id="foo" class="span2" value="" data-slider-min="20" data-slider-max="60" data-slider-step="1" data-slider-value="3.8" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide">
+        <span class="input-group-addon" style="width: 150px;">Inflation Rate</span>
+        <input type="text" id="InflationRateSlider" class="span2" value="" data-slider-min="20" data-slider-max="60" data-slider-step="1" data-slider-value="38" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        <input type="text" id="InflationRateBox" style="width: 50px;" value="3.8 %">
       </div>
 
       <div class="input-group">
@@ -115,10 +115,10 @@
 
     // updateChart([10000, 40000], [20000, 120000]);
 
-    $('#foo').slider()
-      // .on('slide', function(ev){
-      //   $('#bar').val(ev.value);
-      // });
+    $('#InflationRateSlider').slider()
+      .on('slide', function(ev){
+        $('#InflationRateBox').val((ev.value/10.).toFixed(1) + " %");
+      });
 
     </script>
   </body>
