@@ -7,6 +7,7 @@
     <title>Title Here</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/slider.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
 
   </head>
   <body>
@@ -16,7 +17,7 @@
       <div class="input-group">
         <span style="width: 150px;">Inflation Rate</span>
         &nbsp;
-        <input type="text" id="InflationRateSlider" value="" data-slider-min="10" data-slider-max="40" data-slider-step="1" data-slider-value="29" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        <input type="text" id="InflationRateSlider" class="slider" data-slider-min="10" data-slider-max="40" data-slider-step="1" data-slider-value="29">
         &nbsp;
         <input type="text" id="InflationRateBox" style="width: 50px;" value="2.9 %">
       </div>
@@ -25,7 +26,7 @@
       <div class="input-group">
         <span style="width: 150px;">Bond Rate</span>
         &nbsp;
-        <input type="text" id="BondRateSlider" value="" data-slider-min="20" data-slider-max="60" data-slider-step="1" data-slider-value="38" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        <input type="text" id="BondRateSlider" class="slider" data-slider-min="20" data-slider-max="60" data-slider-step="1" data-slider-value="38">
         &nbsp;
         <input type="text" id="BondRateBox" style="width: 50px;" value="3.8 %">
       </div>
@@ -46,7 +47,7 @@
       <div class="input-group">
         <span style="width: 150px;">Degree Length</span>
         &nbsp;
-        <input type="text" id="DegreeLengthSlider" value="" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="3" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        <input type="text" id="DegreeLengthSlider" class="slider" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="3">
         &nbsp;
         <input type="text" id="DegreeLengthBox" style="width: 50px;" value="3">
       </div>
@@ -55,7 +56,7 @@
       <div class="input-group">
         <span style="width: 150px;">Gap Years</span>
         &nbsp;
-        <input type="text" id="GapYearSlider" value="" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="3" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        <input type="text" id="GapYearSlider" class="slider" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="3">
         &nbsp;
         <input type="text" id="GapYearBox" style="width: 50px;" value="3">
       </div>
@@ -64,7 +65,7 @@
       <div class="input-group">
         <span style="width: 150px;">Starting Salary</span>
         &nbsp;
-        <input type="text" id="StartingSalarySlider" value="" data-slider-min="30" data-slider-max="100" data-slider-step="5" data-slider-value="40" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        <input type="text" id="StartingSalarySlider" class="slider" data-slider-min="30" data-slider-max="100" data-slider-step="5" data-slider-value="40">
         &nbsp;
         <input type="text" id="StartingSalaryBox" style="width: 50px;" value="$ 40 K">
       </div>
@@ -72,7 +73,7 @@
       <div class="input-group">
         <span style="width: 150px;">Salary Increase</span>
         &nbsp;
-        <input type="text" id="SalaryIncreaseSlider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="29" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        <input type="text" id="SalaryIncreaseSlider" class="slider" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="29">
         &nbsp;
         <input type="text" id="SalaryIncreaseBox" style="width: 50px;" value="4.0 %">
       </div>
@@ -155,7 +156,7 @@
 
     $('#StartingSalarySlider').slider()
       .on('slide', function(ev){
-        $('#StartingSalaryBox').val("$ " + ev.value + " K");
+        $('#StartingSalaryBox').val("$" + ((ev.value >= 100) ? "" : " ") + ev.value.toString() + " K");
       });
 
     $('#SalaryIncreaseSlider').slider()
