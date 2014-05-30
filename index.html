@@ -16,18 +16,23 @@
       <div class="input-group">
         <span style="width: 150px;">Inflation Rate</span>
         &nbsp;
-        <input type="text" id="InflationRateSlider" value="" data-slider-min="20" data-slider-max="60" data-slider-step="1" data-slider-value="38" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        <input type="text" id="InflationRateSlider" value="" data-slider-min="10" data-slider-max="40" data-slider-step="1" data-slider-value="29" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
         &nbsp;
-        <input type="text" id="InflationRateBox" style="width: 50px;" value="3.8 %">
+        <input type="text" id="InflationRateBox" style="width: 50px;" value="2.9 %">
+      </div>
+
+    <div class="inputs" style="width: 450px;">
+      <div class="input-group">
+        <span style="width: 150px;">Bond Rate</span>
+        &nbsp;
+        <input type="text" id="BondRateSlider" value="" data-slider-min="20" data-slider-max="60" data-slider-step="1" data-slider-value="38" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        &nbsp;
+        <input type="text" id="BondRateBox" style="width: 50px;" value="3.8 %">
       </div>
 
       <div class="input-group">
-        <span class="input-group-addon" style="width: 150px;">Bond Rate</span>
-        <input type="text" class="form-control">
-      </div>
-
-      <div class="input-group">
-      <span class="input-group-addon" style="width: 150px;">Bond Rate</span>
+      <span style="width: 150px;">Degree Band</span>
+      &nbsp;
       <select class="selectpicker" style="width: 200px;">
         <option>Band 1</option>
         <option>Band 2</option>
@@ -37,29 +42,39 @@
       </select>
       </div>
 
+    <div class="inputs" style="width: 450px;">
       <div class="input-group">
-        <span class="input-group-addon" style="width: 150px;">Degree Length</span>
-        <input type="text" class="form-control">
+        <span style="width: 150px;">Degree Length</span>
+        &nbsp;
+        <input type="text" id="DegreeLengthSlider" value="" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="3" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        &nbsp;
+        <input type="text" id="DegreeLengthBox" style="width: 50px;" value="3">
+      </div>
+
+    <div class="inputs" style="width: 450px;">
+      <div class="input-group">
+        <span style="width: 150px;">Gap Years</span>
+        &nbsp;
+        <input type="text" id="GapYearSlider" value="" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="3" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        &nbsp;
+        <input type="text" id="GapYearBox" style="width: 50px;" value="3">
+      </div>
+
+    <div class="inputs" style="width: 450px;">
+      <div class="input-group">
+        <span style="width: 150px;">Starting Salary</span>
+        &nbsp;
+        <input type="text" id="StartingSalarySlider" value="" data-slider-min="30" data-slider-max="100" data-slider-step="5" data-slider-value="40" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        &nbsp;
+        <input type="text" id="StartingSalaryBox" style="width: 50px;" value="$ 40 K">
       </div>
 
       <div class="input-group">
-        <span class="input-group-addon" style="width: 150px;">Gap Years</span>
-        <input type="text" class="form-control">
-      </div>
-
-      <div class="input-group">
-        <span class="input-group-addon" style="width: 150px;">Starting Salary</span>
-        <input type="text" class="form-control">
-      </div>
-
-      <div class="input-group">
-        <span class="input-group-addon" style="width: 150px;">Salary Increase</span>
-        <input type="text" class="form-control">
-      </div>
-
-      <div class="input-group">
-        <span class="input-group-addon" style="width: 150px;">Repayment Rate</span>
-        <input type="text" class="form-control">
+        <span style="width: 150px;">Salary Increase</span>
+        &nbsp;
+        <input type="text" id="SalaryIncreaseSlider" value="" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="29" data-slider-orientation="horizontal" data-slider-selection="after"data-slider-tooltip="hide" style="width: 150px;">
+        &nbsp;
+        <input type="text" id="SalaryIncreaseBox" style="width: 50px;" value="4.0 %">
       </div>
 
     </div>
@@ -117,9 +132,35 @@
 
     // updateChart([10000, 40000], [20000, 120000]);
 
+    /*    Setup Sliders    */
     $('#InflationRateSlider').slider()
       .on('slide', function(ev){
         $('#InflationRateBox').val((ev.value/10.).toFixed(1) + " %");
+      });
+
+    $('#BondRateSlider').slider()
+      .on('slide', function(ev){
+        $('#BondRateBox').val((ev.value/10.).toFixed(1) + " %");
+      });
+
+    $('#DegreeLengthSlider').slider()
+      .on('slide', function(ev){
+        $('#DegreeLengthBox').val(ev.value);
+      });
+
+    $('#GapYearSlider').slider()
+      .on('slide', function(ev){
+        $('#GapYearBox').val(ev.value);
+      });
+
+    $('#StartingSalarySlider').slider()
+      .on('slide', function(ev){
+        $('#StartingSalaryBox').val("$ " + ev.value + " K");
+      });
+
+    $('#SalaryIncreaseSlider').slider()
+      .on('slide', function(ev){
+        $('#SalaryIncreaseBox').val((ev.value/10.).toFixed(1) + " %");
       });
 
     </script>
