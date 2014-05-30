@@ -41,6 +41,11 @@ function updateChart(interest, fees) {
   chart.series[1].setData(fees)
 }
 
+/* Setup Selector */
+$('#DegreeBandSelector').click(function() {
+    updateAll();
+})
+
 /*    Setup Sliders    */
 var sliderOptions = {
   tooltip: "hide",
@@ -89,11 +94,12 @@ function getData() {
   return {
     'InflationRate': InflationRateSlider.data('slider').getValue() / 1000.,
     'BondRate': BondRateSlider.data('slider').getValue() / 1000.,
-    'DegreeBand': 3, // TODO
+    'DegreeBand': parseInt($('#DegreeBandSelector').val()),
     'DegreeLength': DegreeLengthSlider.data('slider').getValue(),
     'GapYear': GapYearSlider.data('slider').getValue(),
     'StartingSalary': StartingSalarySlider.data('slider').getValue() * 1000,
     'SalaryIncrease': SalaryIncreaseSlider.data('slider').getValue() / 1000,
+    'PercentageOfInternational': 0.75,   // XXX Make this a slider?
   };
 }
 
@@ -103,17 +109,25 @@ function updateAll() {
   var oldDebt = 0.0;
   var newDebt = 0.0;
 
-  var initialSemesterFees = 1.0;
+  if (data['DegreeBand'] == 1) {
+    var oldSemesterFees = 3020.0;
+  } else if (data['DegreeBand'] == 2) {
+    var oldSemesterFees = 4304.0;
+  } else {
+    var oldSemesterFees = 5050.0;
+  }
 
-  var normalisedFees = initialSemesterFees * (1. + Math.exp(-0.5 * data['BondRate']));
+  var newSemesterFees = data['PercentageOfInternational'] * 15055.5;
+
+  var normalisedFees = newSemesterFees * (1. + Math.exp(-0.5 * data['BondRate']));
   var ratio = (1 + data['InflationRate']) * Math.exp(-data['BondRate']);
   var normalisedDegreeCost = normalisedFees * (Math.pow(ratio, data['DegreeLength']) - 1) / (ratio - 1);
 
-  // Debts when you start work
+  // debts when you start work
   var newDebt = normalisedDegreeCost * Math.exp(data['BondRate'] * (data['DegreeLength'] + data['GapYear'] - 11/12.));
-  var oldDebt = (initialSemesterFees * 2 * data['DegreeLength']) * Math.pow(1 + data['InflationRate'], data['DegreeLength'] + data['GapYear']);
+  var oldDebt = (oldSemesterFees * 2 * data['DegreeLength']) * Math.pow(1 + data['InflationRate'], data['DegreeLength'] + data['GapYear']);
 
-  console.log(oldDebt, newDebt);
+  updateChart([0, 0], [oldDebt, newDebt]);
 }
 
 updateAll();

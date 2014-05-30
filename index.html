@@ -29,12 +29,10 @@ Eum at fabellas gubergren constituto, mei habeo viderer iuvaret et, labitur iudi
 <div class="inputs">
     <div class="input-item">
     <span class="input-label">Degree Band</span>
-    <select class="selectpicker">
-    <option>Band 1</option>
-    <option>Band 2</option>
-    <option>Band 3</option>
-    <option>Band 4</option>
-    <option>Band 5</option>
+    <select class="selectpicker" id="DegreeBandSelector">
+    <option value="1">Band 1</option>
+    <option value="2">Band 2</option>
+    <option value="3">Band 3</option>
     </select>
     </div>
 
@@ -43,7 +41,7 @@ Eum at fabellas gubergren constituto, mei habeo viderer iuvaret et, labitur iudi
     <input type="text" id="DegreeLengthSlider" class="slider" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="3">
     <input type="text" id="DegreeLengthBox" class="sliderValueBox" value="3" readonly="readonly">
     </div>
-    
+
     <div class="input-item">
     <span class="input-label">Inflation Rate</span>
     <input type="text" id="InflationRateSlider" class="slider" data-slider-min="10" data-slider-max="40" data-slider-step="1" data-slider-value="29">
@@ -55,8 +53,6 @@ Eum at fabellas gubergren constituto, mei habeo viderer iuvaret et, labitur iudi
     <input type="text" id="BondRateSlider" class="slider" data-slider-min="20" data-slider-max="60" data-slider-step="1" data-slider-value="38">
     <input type="text" id="BondRateBox" class="sliderValueBox" value="3.8 %" readonly="readonly">
     </div>
-
-
 
     <div class="input-item">
     <span class="input-label">Gap Years</span>
