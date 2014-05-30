@@ -226,6 +226,12 @@ function updateAll() {
     newYears ++;
   }
 
+  // Update Table
+  $('#OldPaidBox').val("$ " + oldPaid.toFixed(0));
+  $('#NewPaidBox').val("$ " + newPaid.toFixed(0));
+  $('#NewYearsBox').val(newYears);
+  $('#OldYearsBox').val(oldYears);
+
   updateChart([0, 0], [oldPaid, newPaid]);
 }
 
