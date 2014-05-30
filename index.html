@@ -1,92 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Title Here</title>
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/slider.css" rel="stylesheet">
-    <link href="css/main.css" rel="stylesheet">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Title Here</title>
+<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/slider.css" rel="stylesheet">
+<link href="css/main.css" rel="stylesheet">
+</head>
 
-  </head>
-  <body>
-    <h1>Title Here</h1>
+<body>
+<h1>Title Here</h1>
 
-    <div class="inputs" style="width: 450px;">
-      <div class="input-group">
-        <span style="width: 150px;">Inflation Rate</span>
-        &nbsp;
-        <input type="text" id="InflationRateSlider" class="slider" data-slider-min="10" data-slider-max="40" data-slider-step="1" data-slider-value="29">
-        &nbsp;
-        <input type="text" id="InflationRateBox" style="width: 50px;" value="2.9 %">
-      </div>
+<!--Input stuff here-->
+<div class="inputs">
 
-    <div class="inputs" style="width: 450px;">
-      <div class="input-group">
-        <span style="width: 150px;">Bond Rate</span>
-        &nbsp;
-        <input type="text" id="BondRateSlider" class="slider" data-slider-min="20" data-slider-max="60" data-slider-step="1" data-slider-value="38">
-        &nbsp;
-        <input type="text" id="BondRateBox" style="width: 50px;" value="3.8 %">
-      </div>
+<div class="input-item">
+<span class="input-label">Inflation Rate</span>
+<input type="text" id="InflationRateSlider" class="slider" data-slider-min="10" data-slider-max="40" data-slider-step="1" data-slider-value="29">
+<input type="text" id="InflationRateBox" class="sliderValueBox" value="2.9 %" readonly="readonly">
+</div>
 
-      <div class="input-group">
-      <span style="width: 150px;">Degree Band</span>
-      &nbsp;
-      <select class="selectpicker" style="width: 200px;">
-        <option>Band 1</option>
-        <option>Band 2</option>
-        <option>Band 3</option>
-        <option>Band 4</option>
-        <option>Band 5</option>
-      </select>
-      </div>
+<div class="input-item">
+<span class="input-label">Bond Rate</span>
+<input type="text" id="BondRateSlider" class="slider" data-slider-min="20" data-slider-max="60" data-slider-step="1" data-slider-value="38">
+<input type="text" id="BondRateBox" class="sliderValueBox" value="3.8 %" readonly="readonly">
+</div>
 
-    <div class="inputs" style="width: 450px;">
-      <div class="input-group">
-        <span style="width: 150px;">Degree Length</span>
-        &nbsp;
-        <input type="text" id="DegreeLengthSlider" class="slider" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="3">
-        &nbsp;
-        <input type="text" id="DegreeLengthBox" style="width: 50px;" value="3">
-      </div>
+<div class="input-item">
+<span class="input-label">Degree Band</span>
+<select class="selectpicker">
+<option>Band 1</option>
+<option>Band 2</option>
+<option>Band 3</option>
+<option>Band 4</option>
+<option>Band 5</option>
+</select>
+</div>
 
-    <div class="inputs" style="width: 450px;">
-      <div class="input-group">
-        <span style="width: 150px;">Gap Years</span>
-        &nbsp;
-        <input type="text" id="GapYearSlider" class="slider" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="3">
-        &nbsp;
-        <input type="text" id="GapYearBox" style="width: 50px;" value="3">
-      </div>
+<div class="input-item">
+<span class="input-label">Degree Length</span>
+<input type="text" id="DegreeLengthSlider" class="slider" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="3">
+<input type="text" id="DegreeLengthBox" class="sliderValueBox" value="3" readonly="readonly">
+</div>
 
-    <div class="inputs" style="width: 450px;">
-      <div class="input-group">
-        <span style="width: 150px;">Starting Salary</span>
-        &nbsp;
-        <input type="text" id="StartingSalarySlider" class="slider" data-slider-min="30" data-slider-max="100" data-slider-step="5" data-slider-value="40">
-        &nbsp;
-        <input type="text" id="StartingSalaryBox" style="width: 50px;" value="$ 40 K">
-      </div>
+<div class="input-item">
+<span class="input-label">Gap Years</span>
+<input type="text" id="GapYearSlider" class="slider" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="3">
+<input type="text" id="GapYearBox" class="sliderValueBox" value="3" readonly="readonly">
+</div>
 
-      <div class="input-group">
-        <span style="width: 150px;">Salary Increase</span>
-        &nbsp;
-        <input type="text" id="SalaryIncreaseSlider" class="slider" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="29">
-        &nbsp;
-        <input type="text" id="SalaryIncreaseBox" style="width: 50px;" value="4.0 %">
-      </div>
+<div class="input-item">
+<span class="input-label">Starting Salary</span>
+<input type="text" id="StartingSalarySlider" class="slider" data-slider-min="30" data-slider-max="100" data-slider-step="5" data-slider-value="40">
+<input type="text" id="StartingSalaryBox" class="sliderValueBox" value="$40 K" readonly="readonly">
+</div>
 
-    </div>
+<div class="input-item">
+<span class="input-label">Salary Increase</span>
+<input type="text" id="SalaryIncreaseSlider" class="slider" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="29">
+<input type="text" id="SalaryIncreaseBox" class="sliderValueBox" value="4.0 %" readonly="readonly">
+</div>
 
-    <div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
+</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-slider.js"></script>
-    <script src="js/highcharts.js"></script>
-    <script src="js/main.js"></script>
-  </body>
+<div id="container" style="width: 800px; height: 400px; margin: 0 auto"></div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/bootstrap-slider.js"></script>
+<script src="js/highcharts.js"></script>
+<script src="js/main.js"></script>
 
 </html>

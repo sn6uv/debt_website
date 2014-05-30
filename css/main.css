@@ -1,6 +1,39 @@
+.inputs {
+    position: relative;
+    width: 280pt;
+    padding: 20px 0px 15px 15px;
+    border: 1pt #ccc solid;
+}
+
+.input-item {
+    position: relative;
+    margin-bottom: 5px;
+}
+
+.input-label {
+    display: inline-block;
+    vertical-align: middle;
+    width: 80pt;
+}
+
 .slider {
-    input type: "text";
-    id: "BondRateSlider"
-    value: "";
-    style: "width: 150px;";
+    display: inline-block;
+    width: 150px;
+    vertical-align: middle;
+    margin-left: 5px;
+    margin-right: 10px;
+}
+
+.sliderValueBox {
+    text-align: center;
+    border: 1px solid #000;
+    width: 55px;
+}
+
+.selectpicker {
+    display: inline-block;
+    vertical-align: middle;
+    width: 150px;
+    margin-left: 5px;
+    margin-right: 10px;
 }
