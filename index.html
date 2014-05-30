@@ -132,37 +132,41 @@
       }
 
       /*    Setup Sliders    */
-      var InflationRateSlider = $('#InflationRateSlider').slider()
+      var sliderOptions = {
+        tooltip: "hide",
+      }
+
+      var InflationRateSlider = $('#InflationRateSlider').slider(sliderOptions)
       InflationRateSlider.on('slide', function(ev){
           $('#InflationRateBox').val((ev.value/10.).toFixed(1) + " %");
           updateAll();
       });
 
-      var BondRateSlider = $('#BondRateSlider').slider()
+      var BondRateSlider = $('#BondRateSlider').slider(sliderOptions)
       BondRateSlider.on('slide', function(ev){
           $('#BondRateBox').val((ev.value/10.).toFixed(1) + " %");
           updateAll();
         });
 
-      var DegreeLengthSlider = $('#DegreeLengthSlider').slider()
+      var DegreeLengthSlider = $('#DegreeLengthSlider').slider(sliderOptions)
       DegreeLengthSlider.on('slide', function(ev){
           $('#DegreeLengthBox').val(ev.value);
           updateAll();
         });
 
-      var GapYearSlider = $('#GapYearSlider').slider()
+      var GapYearSlider = $('#GapYearSlider').slider(sliderOptions)
       GapYearSlider.on('slide', function(ev){
           $('#GapYearBox').val(ev.value);
           updateAll();
         });
 
-      var StartingSalarySlider = $('#StartingSalarySlider').slider()
+      var StartingSalarySlider = $('#StartingSalarySlider').slider(sliderOptions)
       StartingSalarySlider.on('slide', function(ev){
           $('#StartingSalaryBox').val("$" + ((ev.value >= 100) ? "" : " ") + ev.value.toString() + " K");
           updateAll();
         });
 
-      var SalaryIncreaseSlider = $('#SalaryIncreaseSlider').slider()
+      var SalaryIncreaseSlider = $('#SalaryIncreaseSlider').slider(sliderOptions)
       SalaryIncreaseSlider.on('slide', function(ev){
           $('#SalaryIncreaseBox').val((ev.value/10.).toFixed(1) + " %");
           updateAll();
