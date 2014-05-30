@@ -2,8 +2,5 @@
     input type: "text";
     id: "BondRateSlider"
     value: "";
-    data-slider-orientation:"horizontal";
-    data-slider-selection: "after";
-    data-slider-tooltip: "hide";
     style: "width: 150px;";
 }
