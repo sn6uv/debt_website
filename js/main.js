@@ -106,9 +106,16 @@ function getData() {
 function updateAll() {
   /* Compute costs and update chart */
   var data = getData();
-  var oldDebt = 0.0;
-  var newDebt = 0.0;
 
+  var oldDebt = 0.0;    // running debt under old system
+  var newDebt = 0.0;    // running debt under new system
+
+  var oldFees = 0.0;    // total fees paid under old system (today's dollars)
+  var newFees = 0.0;    // total fees paid under new system (today's dollars)
+
+  var inflationFactor;
+
+  // Calculate fees per semester (today's dollars)
   if (data['DegreeBand'] == 1) {
     var oldSemesterFees = 3020.0;
   } else if (data['DegreeBand'] == 2) {
@@ -119,24 +126,32 @@ function updateAll() {
 
   var newSemesterFees = data['PercentageOfInternational'] * 15055.5;
 
-  var normalisedFees = newSemesterFees * (1. + Math.exp(-0.5 * data['BondRate']));
-  var ratio = (1 + data['InflationRate']) * Math.exp(-data['BondRate']);
-  var normalisedDegreeCost = normalisedFees * (Math.pow(ratio, data['DegreeLength']) - 1) / (ratio - 1);
+  /* Stage 1 - Studying */
+  for (var i = 1; i <= 2 * data['DegreeLength']; i++) {
+    inflationFactor = Math.pow(1 + data['InflationRate'], Math.floor(i / 2));    // Assume fees rise with inflation
 
-  // debts when you start work
-  var newDebt = normalisedDegreeCost * Math.exp(data['BondRate'] * (data['DegreeLength'] + data['GapYear'] - 11/12.));
-  var oldDebt = (oldSemesterFees * 2 * data['DegreeLength']) * Math.pow(1 + data['InflationRate'], data['DegreeLength'] + data['GapYear']);
+    // old system
+    oldFees += oldSemesterFees;
+    oldDebt += oldSemesterFees * inflationFactor;
 
-  var yearsTaken = data['DegreeLength'] + data['GapYear'];
-  var income = data['StartingSalary'] * Math.pow(1 + data['InflationRate'], yearsTaken); // inflation adjusted income
+    // new system
+    newFees += newSemesterFees;
+    newDebt *= Math.exp(data['BondRate']/2);    // interest on outstanding debt
+    newDebt += newSemesterFees * inflationFactor;
+  }
 
+  /* Stage 2 - Gap Years */
+  oldDebt *= Math.pow(1 + data['InflationRate'], data['GapYear']);
+  for (var i = 1; i < 2 * data['GapYear']; i++) {
+    newDebt *= Math.exp(data['BondRate']/2);
+  }
+
+  /* Stage 3 - Working */
   var repaymentRate;
-  var inflationFactor;
-  var newPaid = 0.0;    // how much is paid under new system (today's dollars)
-  var oldPaid = 0.0;    // how much is paid under old system (today's dollars)
-  var newYears = yearsTaken; // years taken to repay load under new system
-  var oldYears = yearsTaken; // years taken to repay load under old system
 
+  var oldPaid = 0.0;    // how much is paid under old system (today's dollars)
+  var income = data['StartingSalary'];      // current income
+  var oldYears = data['DegreeLength'] + data['GapYear'];
   /* old system */
   while (true) {
     inflationFactor = Math.pow(1 + data['InflationRate'], oldYears);
@@ -176,11 +191,14 @@ function updateAll() {
         oldPaid += income*repaymentRate*Math.pow(1 + data['InflationRate'], -oldYears);
     }
 
-    oldDebt *= Math.exp(data['BondRate']);  // interest on remaining loan
+    oldDebt *= (1.0 + data['InflationRate']);  // interest on remaining loan
     income *= (1.0 + data['SalaryIncrease']);
     oldYears ++;
   }
 
+  var newPaid = 0.0;    // how much is paid under new system (today's dollars)
+  var income = data['StartingSalary'];      // current income
+  var newYears = data['DegreeLength'] + data['GapYear'];
   /* new system */
   while (true) {
     // calculate repayment
@@ -212,6 +230,8 @@ function updateAll() {
         break;
     }
 
+    newDebt *= Math.exp(data['BondRate']);  // interest on remaining loan
+
     // debt repayments
     if (income*repaymentRate > newDebt) {   // finish paying off loan
         newPaid += newDebt*Math.pow(1 + data['InflationRate'], -newYears);
@@ -221,7 +241,6 @@ function updateAll() {
         newPaid += income*repaymentRate*Math.pow(1 + data['InflationRate'], -newYears);
     }
 
-    newDebt *= Math.exp(data['InflationRate']);  // interest on remaining loan
     income *= (1.0 + data['SalaryIncrease']);
     newYears ++;
   }
@@ -232,7 +251,7 @@ function updateAll() {
   $('#NewYearsBox').val(newYears);
   $('#OldYearsBox').val(oldYears);
 
-  updateChart([0, 0], [oldPaid, newPaid]);
+  updateChart([oldPaid-oldFees, newPaid-newFees], [oldFees, newFees]);
 }
 
 updateAll();
