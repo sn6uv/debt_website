@@ -136,14 +136,18 @@ function updateAll() {
 
     // new system
     newFees += newSemesterFees;
-    newDebt *= Math.exp(data['BondRate']/2);    // interest on outstanding debt
+
+    if (i % 2) {    // interest compunded anually (every second semester)
+      newDebt *= (1.0 + data['BondRate']);
+    }
+
     newDebt += newSemesterFees * inflationFactor;
   }
 
   /* Stage 2 - Gap Years */
   oldDebt *= Math.pow(1 + data['InflationRate'], data['GapYear']);
-  for (var i = 1; i < 2 * data['GapYear']; i++) {
-    newDebt *= Math.exp(data['BondRate']/2);
+  for (var i = 1; i < data['GapYear']; i++) {   // Interest compunded anually
+    newDebt *= (1.0 + data['BondRate']);
   }
 
   /* Stage 3 - Working */
@@ -230,7 +234,7 @@ function updateAll() {
         break;
     }
 
-    newDebt *= Math.exp(data['BondRate']);  // interest on remaining loan
+    newDebt *= (1.0 + data['BondRate']);  // interest on remaining loan
 
     // debt repayments
     if (income*repaymentRate > newDebt) {   // finish paying off loan
