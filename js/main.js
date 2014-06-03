@@ -154,8 +154,8 @@ function updateAll() {
   var repaymentRate;
 
   var oldPaid = 0.0;    // how much is paid under old system (today's dollars)
-  var income = data.StartingSalary;      // current income
   var oldYears = data.DegreeLength + data.GapYear;
+  var income = data.StartingSalary*Math.pow(1 + data.InflationRate, oldYears);  // Income adjusted for inflation
   /* old system */
   while (true) {
     inflationFactor = Math.pow(1 + data.InflationRate, oldYears);
@@ -201,8 +201,8 @@ function updateAll() {
   }
 
   var newPaid = 0.0;    // how much is paid under new system (today's dollars)
-  var income = data.StartingSalary;      // current income
   var newYears = data.DegreeLength + data.GapYear;
+  var income = data.StartingSalary*Math.pow(1 + data.InflationRate, newYears);  // Income adjusted for inflation
   /* new system */
   while (true) {
     // calculate repayment
