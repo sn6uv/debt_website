@@ -56,12 +56,22 @@ var sliderOptions = {
 
 var InflationRateSlider = $('#InflationRateSlider').slider(sliderOptions);
 InflationRateSlider.on('slide', function (ev) {
+  if (ev.value > BondRateSlider.data('slider').getValue()) {
+    // inflation rate can't rise above bond rate
+    BondRateSlider.data('slider').setValue(ev.value);
+    $('#BondRateBox').val((ev.value / 10.0).toFixed(1) + " %");
+  }
   $('#InflationRateBox').val((ev.value / 10.0).toFixed(1) + " %");
   updateAll();
 });
 
 var BondRateSlider = $('#BondRateSlider').slider(sliderOptions);
 BondRateSlider.on('slide', function (ev) {
+  if (ev.value < InflationRateSlider.data('slider').getValue()) {
+    // bond rate can't drop below inflation rate
+    InflationRateSlider.data('slider').setValue(ev.value);
+    $('#InflationRateBox').val((ev.value / 10.0).toFixed(1) + " %");
+  }
   $('#BondRateBox').val((ev.value / 10.0).toFixed(1) + " %");
   updateAll();
 });
