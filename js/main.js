@@ -387,12 +387,12 @@ function updateAll() {
   var newInterest = newPaid-newFees;
 
   // Update Table
-  $('#OldPaidBox').val("$ " + oldPaid.toFixed(0));
-  $('#NewPaidBox').val("$ " + newPaid.toFixed(0));
-  $('#OldInterestBox').val("$ " + oldInterest.toFixed(0));
-  $('#NewInterestBox').val("$ " + newInterest.toFixed(0));
-  $('#NewYearsBox').val(newYears-years);
-  $('#OldYearsBox').val(oldYears-years);
+  $('#OldPaidBox')[0].innerHTML = "$ " + oldPaid.toFixed(0);
+  $('#NewPaidBox')[0].innerHTML = "$ " + newPaid.toFixed(0);
+  $('#OldInterestBox')[0].innerHTML = "$ " + oldInterest.toFixed(0);
+  $('#NewInterestBox')[0].innerHTML = "$ " + newInterest.toFixed(0);
+  $('#NewYearsBox')[0].innerHTML = newYears - years;
+  $('#OldYearsBox')[0].innerHTML = oldYears - years;
 
   updateChart([oldInterest, newInterest], [oldFees, newFees]);
 }
