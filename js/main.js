@@ -127,145 +127,147 @@ function updateAll() {
   var internationalFees;
 
   // Calculate fees per semester (today's dollars)
-  if (degree === 1) {
+  switch (degree) {
+  case 1:
     oldAnnualFees = 10085;
     newContribution = 1805;
     internationalFees = 30111;
-	}
-  if (degree === 2) {
+    break;
+  case 2:
     oldAnnualFees = 10085;
     newContribution = 1805;
     internationalFees = 30111;
-  }
-//  if (degree === 3) {
-//    oldAnnualFees = 8613;
-//    newContribution = 18067;
-//    internationalFees = 0;
-//  }
-  if (degree === 4) {
+    break;
+  // case 3:
+  //   oldAnnualFees = 8613;
+  //   newContribution = 18067;
+  //   internationalFees = 0;
+  //   break;
+  case 4:
     oldAnnualFees = 6044;
     newContribution = 9033;
     internationalFees = 30111;
-  }
-//  if (degree === 5) {
-//    oldAnnualFees = 8613;
-//    newContribution = 9033;
-//    internationalFees = 0;
-//  }
-  if (degree === 6) {
+    break;
+  // case 5:
+  //   oldAnnualFees = 8613;
+  //   newContribution = 9033;
+  //   internationalFees = 0;
+  //   break;
+  case 6:
     oldAnnualFees = 10085;
     newContribution = 1805;
     internationalFees = 30111;
-  }
-  if (degree === 7) {
+    break;
+  case 7:
     oldAnnualFees = 8613;
     newContribution = 9033;
     internationalFees = 30111;
-  }
-//  if (degree === 8) {
-//    oldAnnualFees = 10085;
-//    newContribution = 18067;
-//    internationalFees = 0;
-//  }
-  if (degree === 9) {
+    break;
+  // case 8:
+  //   oldAnnualFees = 10085;
+  //   newContribution = 18067;
+  //   internationalFees = 0;
+  //   break;
+  case 9:
     oldAnnualFees = 10085;
     newContribution = 1805;
     internationalFees = 30111;
-  }
-//  if (degree === 10) {
-//    oldAnnualFees = 6044;
-//    newContribution = 9033;
-//    internationalFees = 0;
-//  }
-  if (degree === 11) {
+    break;
+  // case 10:
+  //   oldAnnualFees = 6044;
+  //   newContribution = 9033;
+  //   internationalFees = 0;
+  //   break;
+  case 11:
     oldAnnualFees = 8613;
     newContribution = 12045;
     internationalFees = 30111;
-  }
-  if (degree === 12) {
+    break;
+  case 12:
     oldAnnualFees = 6044;
     newContribution = 12045;
     internationalFees = 25984;
-  }
-//  if (degree === 13) {
-//    oldAnnualFees = 8613;
-//    newContribution = 9033;
-//    internationalFees = 0;
-//  }
-  if (degree === 14) {
+    break;
+  case 13:
+  //   oldAnnualFees = 8613;
+  //   newContribution = 9033;
+  //   internationalFees = 0;
+  //   break;
+  case 14:
     oldAnnualFees = 6044;
     newContribution = 6021;
     internationalFees = 25984;
-  }
-  if (degree === 15) {
+    break;
+  case 15:
     oldAnnualFees = 10085;
     newContribution = 1805;
     internationalFees = 30111;
-  }
-  if (degree === 16) {
+    break;
+  case 16:
     oldAnnualFees = 8613;
     newContribution = 12045;
     internationalFees = 30111;
-  }
-  if (degree === 17) {
+    break;
+  case 17:
     oldAnnualFees = 10085;
     newContribution = 18067;
     internationalFees = 30111;
-  }
-//  if (degree === 18) {
-//    oldAnnualFees = 6044;
-//    newContribution = 12045;
-//    internationalFees = 30111;
-//  }
-  if (degree === 19) {
+    break;
+  case 18:
+  //   oldAnnualFees = 6044;
+  //   newContribution = 12045;
+  //   internationalFees = 30111;
+  //   break;
+  case 19:
     oldAnnualFees = 8613;
     newContribution = 12045;
     internationalFees = 30111;
-  }
-  if (degree === 20) {
+    break;
+  case 20:
     oldAnnualFees = 6044;
     newContribution = 6021;
     internationalFees = 30111;
-  }
-  if (degree === 21) {
+    break;
+  case 21:
     oldAnnualFees = 8613;
     newContribution = 12045;
     internationalFees = 30111;
-  }
-//  if (degree === 22) {
-//    oldAnnualFees = 8613;
-//    newContribution = 12045;
-//    internationalFees = 30111;
-//  }
-//  if (degree === 23) {
-//    oldAnnualFees = 10085;
-//    newContribution = 18067;
-//    internationalFees = 0;
-//  }
-  if (degree === 24) {
+    break;
+  // case 22:
+  //   oldAnnualFees = 8613;
+  //   newContribution = 12045;
+  //   internationalFees = 30111;
+  //   break;
+  // case 23:
+  //   oldAnnualFees = 10085;
+  //   newContribution = 18067;
+  //   internationalFees = 0;
+  //   break;
+  case 24:
     oldAnnualFees = 6044;
     newContribution = 9033;
     internationalFees = 25984;
+    break;
   }
-  var newAnnualFees = data.TuitionFees * internationalFees - newContribution*Math.pow(1+inflation,-2);
-  if (newAnnualFees < 0) {newAnnualFees=0;}
+  var newAnnualFees = data.TuitionFees * internationalFees - newContribution * Math.pow(1 + inflation, -2);
+  if (newAnnualFees < 0) {newAnnualFees = 0; }
 
-  var oldFees = years*oldAnnualFees;    // total fees paid under old system (today's dollars)
-  var newFees = years*newAnnualFees;    // total fees paid under new system (today's dollars)
+  var oldFees = years * oldAnnualFees;    // total fees paid under old system (today's dollars)
+  var newFees = years * newAnnualFees;    // total fees paid under new system (today's dollars)
 
   /* Stage 1 - Studying */
   for (var i = 1; i <= data.DegreeLength; i++) {
     // old system
-    oldDebt = oldDebt*(1+inflation) + oldAnnualFees * Math.pow(1 + inflation, i-1);
+    oldDebt = oldDebt*(1 + inflation) + oldAnnualFees * Math.pow(1 + inflation, i - 1);
 
     // new system
-    newDebt = newDebt*(1+bondRate) + newAnnualFees * Math.pow(1 + inflation, i-1);
+    newDebt = newDebt*(1 + bondRate) + newAnnualFees * Math.pow(1 + inflation, i - 1);
   }
 
 
   /* Stage 2 - Gap Years */
-  oldDebt *= Math.pow(1+inflation,gap);
-  newDebt *= Math.pow(1+bondRate, gap);
+  oldDebt *= Math.pow(1 + inflation, gap);
+  newDebt *= Math.pow(1 + bondRate, gap);
 
 
   /* Stage 3 - Working */
@@ -273,7 +275,7 @@ function updateAll() {
   var inflationFactor;
 
   var oldPaid = 0.0;    // how much is paid under old system (today's dollars)
-  var oldYears = years+gap;
+  var oldYears = years + gap;
   var income = startingSalary*Math.pow(1 + inflation, oldYears);  // Income adjusted for inflation
   /* old system */
   while (true) {
@@ -305,15 +307,15 @@ function updateAll() {
       break;
     }
 
-    oldDebt *= (1.0 + inflation);  	// debt indexed by inflation
+    oldDebt *= (1.0 + inflation);   // debt indexed by inflation
 
     // debt repayments
     if (income*repaymentRate >= oldDebt) {   // finish paying off loan
       oldPaid += oldDebt/inflationFactor;
       break;
     } else {
-      oldDebt -= income*repaymentRate;
-      oldPaid += income*repaymentRate/inflationFactor;
+      oldDebt -= income * repaymentRate;
+      oldPaid += income * repaymentRate / inflationFactor;
     }
 
     income *= (1.0 + salaryIncrease);
@@ -322,13 +324,13 @@ function updateAll() {
 
   var newPaid = 0.0;    // how much is paid under new system (today's dollars)
   var newYears = years+gap;
-  var income = startingSalary*Math.pow(1 + inflation, newYears);  // Income adjusted for inflation
-  var new_bracket = 50638*Math.pow(1+inflation,-2);
+  var income = startingSalary * Math.pow(1 + inflation, newYears);  // Income adjusted for inflation
+  var new_bracket = 50638 * Math.pow(1 + inflation, -2);
 
   /* new system */
   while (true) {
     // calculate repayment
-    inflationFactor = Math.pow(1 + data.InflationRate, newYears);
+    inflationFactor = Math.pow(1 + inflation, newYears);
     if (income < new_bracket * inflationFactor) {
       repaymentRate = 0.000;
     } else if (income < 51309 * inflationFactor) {
@@ -357,15 +359,15 @@ function updateAll() {
       break;
     }
 
-    newDebt *= (1.0 + bondRate);  	// debt indexed by the bond rate
+    newDebt *= (1.0 + bondRate);    // debt indexed by the bond rate
 
     // debt repayments
     if (income*repaymentRate > newDebt) {   // finish paying off loan
-        newPaid += newDebt/inflationFactor;
-        break;
+      newPaid += newDebt/inflationFactor;
+      break;
     } else {
-        newDebt -= income*repaymentRate;
-        newPaid += income*repaymentRate/inflationFactor;
+      newDebt -= income*repaymentRate;
+      newPaid += income*repaymentRate/inflationFactor;
     }
     income *= (1.0 + salaryIncrease);
     newYears ++;
