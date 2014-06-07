@@ -8,7 +8,7 @@ var chart = new Highcharts.Chart({
   xAxis: {categories: ['Before', 'After']},
   yAxis: {
     min: 0,
-    title: {text: 'Money $'},
+    title: {text: 'Total cost of education $'},
   },
   legend: {
     align: 'right',
@@ -72,6 +72,12 @@ DegreeLengthSlider.on('slide', function (ev) {
   updateAll();
 });
 
+var TuitionFeesSlider = $('#TuitionFeesSlider').slider(sliderOptions);
+TuitionFeesSlider.on('slide', function (ev) {
+  $('#TuitionFeesBox').val((ev.value / 10.0).toFixed(0) + " %");
+  updateAll();
+});
+
 var GapYearSlider = $('#GapYearSlider').slider(sliderOptions);
 GapYearSlider.on('slide', function (ev) {
   $('#GapYearBox').val(ev.value);
@@ -96,69 +102,182 @@ function getData() {
     'BondRate': BondRateSlider.data('slider').getValue() / 1000.0,
     'DegreeBand': parseInt($('#DegreeBandSelector').val()),
     'DegreeLength': DegreeLengthSlider.data('slider').getValue(),
+    'TuitionFees': TuitionFeesSlider.data('slider').getValue() / 1000.0,
     'GapYear': GapYearSlider.data('slider').getValue(),
     'StartingSalary': StartingSalarySlider.data('slider').getValue() * 1000,
     'SalaryIncrease': SalaryIncreaseSlider.data('slider').getValue() / 1000,
-    'PercentageOfInternational': 0.75,   // XXX Make this a slider?
   };
 }
 
 function updateAll() {
   /* Compute costs and update chart */
   var data = getData();
-
+  var inflation = data.InflationRate;
+  var bondRate = data.BondRate;
+  var years = data.DegreeLength;
+  var gap = data.GapYear;
+  var startingSalary = data.StartingSalary;
+  var salaryIncrease = data.SalaryIncrease;
+  var degree = data.DegreeBand;
   var oldDebt = 0.0;    // running debt under old system
   var newDebt = 0.0;    // running debt under new system
 
-  var oldFees = 0.0;    // total fees paid under old system (today's dollars)
-  var newFees = 0.0;    // total fees paid under new system (today's dollars)
-
-  var inflationFactor;
+  var oldAnnualFees;
+  var newContribution;
+  var internationalFees;
 
   // Calculate fees per semester (today's dollars)
-  if (data.DegreeBand === 1) {
-    var oldSemesterFees = 3020.0;
-  } else if (data.DegreeBand === 2) {
-    var oldSemesterFees = 4304.0;
-  } else {
-    var oldSemesterFees = 5050.0;
+  if (degree === 1) {
+    oldAnnualFees = 10085;
+    newContribution = 1805;
+    internationalFees = 30111;
+	}
+  if (degree === 2) {
+    oldAnnualFees = 10085;
+    newContribution = 1805;
+    internationalFees = 30111;
   }
+//  if (degree === 3) {
+//    oldAnnualFees = 8613;
+//    newContribution = 18067;
+//    internationalFees = 0;
+//  }
+  if (degree === 4) {
+    oldAnnualFees = 6044;
+    newContribution = 9033;
+    internationalFees = 30111;
+  }
+//  if (degree === 5) {
+//    oldAnnualFees = 8613;
+//    newContribution = 9033;
+//    internationalFees = 0;
+//  }
+  if (degree === 6) {
+    oldAnnualFees = 10085;
+    newContribution = 1805;
+    internationalFees = 30111;
+  }
+  if (degree === 7) {
+    oldAnnualFees = 8613;
+    newContribution = 9033;
+    internationalFees = 30111;
+  }
+//  if (degree === 8) {
+//    oldAnnualFees = 10085;
+//    newContribution = 18067;
+//    internationalFees = 0;
+//  }
+  if (degree === 9) {
+    oldAnnualFees = 10085;
+    newContribution = 1805;
+    internationalFees = 30111;
+  }
+//  if (degree === 10) {
+//    oldAnnualFees = 6044;
+//    newContribution = 9033;
+//    internationalFees = 0;
+//  }
+  if (degree === 11) {
+    oldAnnualFees = 8613;
+    newContribution = 12045;
+    internationalFees = 30111;
+  }
+  if (degree === 12) {
+    oldAnnualFees = 6044;
+    newContribution = 12045;
+    internationalFees = 25984;
+  }
+//  if (degree === 13) {
+//    oldAnnualFees = 8613;
+//    newContribution = 9033;
+//    internationalFees = 0;
+//  }
+  if (degree === 14) {
+    oldAnnualFees = 6044;
+    newContribution = 6021;
+    internationalFees = 25984;
+  }
+  if (degree === 15) {
+    oldAnnualFees = 10085;
+    newContribution = 1805;
+    internationalFees = 30111;
+  }
+  if (degree === 16) {
+    oldAnnualFees = 8613;
+    newContribution = 12045;
+    internationalFees = 30111;
+  }
+  if (degree === 17) {
+    oldAnnualFees = 10085;
+    newContribution = 18067;
+    internationalFees = 30111;
+  }
+//  if (degree === 18) {
+//    oldAnnualFees = 6044;
+//    newContribution = 12045;
+//    internationalFees = 30111;
+//  }
+  if (degree === 19) {
+    oldAnnualFees = 8613;
+    newContribution = 12045;
+    internationalFees = 30111;
+  }
+  if (degree === 20) {
+    oldAnnualFees = 6044;
+    newContribution = 6021;
+    internationalFees = 30111;
+  }
+  if (degree === 21) {
+    oldAnnualFees = 8613;
+    newContribution = 12045;
+    internationalFees = 30111;
+  }
+//  if (degree === 22) {
+//    oldAnnualFees = 8613;
+//    newContribution = 12045;
+//    internationalFees = 30111;
+//  }
+//  if (degree === 23) {
+//    oldAnnualFees = 10085;
+//    newContribution = 18067;
+//    internationalFees = 0;
+//  }
+  if (degree === 24) {
+    oldAnnualFees = 6044;
+    newContribution = 9033;
+    internationalFees = 25984;
+  }
+  var newAnnualFees = data.TuitionFees * internationalFees - newContribution*Math.pow(1+inflation,-2);
+  if (newAnnualFees < 0) {newAnnualFees=0;}
 
-  var newSemesterFees = data.PercentageOfInternational * 15055.5;
+  var oldFees = years*oldAnnualFees;    // total fees paid under old system (today's dollars)
+  var newFees = years*newAnnualFees;    // total fees paid under new system (today's dollars)
 
   /* Stage 1 - Studying */
-  for (var i = 1; i <= 2 * data.DegreeLength; i++) {
-    inflationFactor = Math.pow(1 + data.InflationRate, Math.floor(i / 2));    // Assume fees rise with inflation
-
+  for (var i = 1; i <= data.DegreeLength; i++) {
     // old system
-    oldFees += oldSemesterFees;
-    oldDebt += oldSemesterFees * inflationFactor;
+    oldDebt = oldDebt*(1+inflation) + oldAnnualFees * Math.pow(1 + inflation, i-1);
 
     // new system
-    newFees += newSemesterFees;
-
-    if (i % 2) {    // interest compunded anually (every second semester)
-      newDebt *= (1.0 + data.BondRate);
-    }
-
-    newDebt += newSemesterFees * inflationFactor;
+    newDebt = newDebt*(1+bondRate) + newAnnualFees * Math.pow(1 + inflation, i-1);
   }
+
 
   /* Stage 2 - Gap Years */
-  oldDebt *= Math.pow(1 + data.InflationRate, data.GapYear);
-  for (var i = 1; i < data.GapYear; i++) {   // Interest compunded anually
-    newDebt *= (1.0 + data.BondRate);
-  }
+  oldDebt *= Math.pow(1+inflation,gap);
+  newDebt *= Math.pow(1+bondRate, gap);
+
 
   /* Stage 3 - Working */
   var repaymentRate;
+  var inflationFactor;
 
   var oldPaid = 0.0;    // how much is paid under old system (today's dollars)
-  var oldYears = data.DegreeLength + data.GapYear;
-  var income = data.StartingSalary*Math.pow(1 + data.InflationRate, oldYears);  // Income adjusted for inflation
+  var oldYears = years+gap;
+  var income = startingSalary*Math.pow(1 + inflation, oldYears);  // Income adjusted for inflation
   /* old system */
   while (true) {
-    inflationFactor = Math.pow(1 + data.InflationRate, oldYears);
+    inflationFactor = Math.pow(1 + inflation, oldYears);
     // calculate repayment
     if (income < 51309 * inflationFactor) {
       repaymentRate = 0.000;
@@ -182,32 +301,35 @@ function updateAll() {
       repaymentRate = 0.080;
     }
 
-    if (oldYears > 60) {  // debt for life
+    if (oldYears > 80) {  // debt for life
       break;
     }
 
+    oldDebt *= (1.0 + inflation);  	// debt indexed by inflation
+
     // debt repayments
-    if (income*repaymentRate > oldDebt) {   // finish paying off loan
-      oldPaid += oldDebt*Math.pow(1 + data.InflationRate, -oldYears);
+    if (income*repaymentRate >= oldDebt) {   // finish paying off loan
+      oldPaid += oldDebt/inflationFactor;
       break;
     } else {
       oldDebt -= income*repaymentRate;
-      oldPaid += income*repaymentRate*Math.pow(1 + data.InflationRate, -oldYears);
+      oldPaid += income*repaymentRate/inflationFactor;
     }
 
-    oldDebt *= (1.0 + data.InflationRate);  // interest on remaining loan
-    income *= (1.0 + data.SalaryIncrease);
+    income *= (1.0 + salaryIncrease);
     oldYears ++;
   }
 
   var newPaid = 0.0;    // how much is paid under new system (today's dollars)
-  var newYears = data.DegreeLength + data.GapYear;
-  var income = data.StartingSalary*Math.pow(1 + data.InflationRate, newYears);  // Income adjusted for inflation
+  var newYears = years+gap;
+  var income = startingSalary*Math.pow(1 + inflation, newYears);  // Income adjusted for inflation
+  var new_bracket = 50638*Math.pow(1+inflation,-2);
+
   /* new system */
   while (true) {
     // calculate repayment
     inflationFactor = Math.pow(1 + data.InflationRate, newYears);
-    if (income < 46206 * inflationFactor) {
+    if (income < new_bracket * inflationFactor) {
       repaymentRate = 0.000;
     } else if (income < 51309 * inflationFactor) {
       repaymentRate = 0.020;
@@ -231,32 +353,36 @@ function updateAll() {
       repaymentRate = 0.080;
     }
 
-    if (newYears > 60) {  // debt for life
+    if (newYears > 80) {  // debt for life
       break;
     }
 
-    newDebt *= (1.0 + data.BondRate);  // interest on remaining loan
+    newDebt *= (1.0 + bondRate);  	// debt indexed by the bond rate
 
     // debt repayments
     if (income*repaymentRate > newDebt) {   // finish paying off loan
-        newPaid += newDebt*Math.pow(1 + data.InflationRate, -newYears);
+        newPaid += newDebt/inflationFactor;
         break;
     } else {
         newDebt -= income*repaymentRate;
-        newPaid += income*repaymentRate*Math.pow(1 + data.InflationRate, -newYears);
+        newPaid += income*repaymentRate/inflationFactor;
     }
-
-    income *= (1.0 + data.SalaryIncrease);
+    income *= (1.0 + salaryIncrease);
     newYears ++;
   }
+
+  var oldInterest=0;
+  var newInterest = newPaid-newFees;
 
   // Update Table
   $('#OldPaidBox').val("$ " + oldPaid.toFixed(0));
   $('#NewPaidBox').val("$ " + newPaid.toFixed(0));
-  $('#NewYearsBox').val(newYears);
-  $('#OldYearsBox').val(oldYears);
+  $('#OldInterestBox').val("$ " + oldInterest.toFixed(0));
+  $('#NewInterestBox').val("$ " + newInterest.toFixed(0));
+  $('#NewYearsBox').val(newYears-years);
+  $('#OldYearsBox').val(oldYears-years);
 
-  updateChart([oldPaid-oldFees, newPaid-newFees], [oldFees, newFees]);
+  updateChart([oldInterest, newInterest], [oldFees, newFees]);
 }
 
 updateAll();

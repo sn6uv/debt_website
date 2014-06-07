@@ -4,22 +4,31 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Compare your Fees! - How much you'll pay if university fee deregulation becomes policy.</title>
+<title>Comparison of fees before/after deregulation</title>
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/slider.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
 </head>
 
 <body>
-<div class="header"> Compare your fees! </div>
+<div class="header"> Comparison of the cost of education at the ANU <br>
+before/after deregulation</div>
 
 <!--Info blurb-->
 <div id="info">
-<h2>Title Here</h2>
-Blurb and information about the cost of university fees and HECS debt before and afte the proposed deregulation policy.
-Lorem ipsum stuff and stuff.
-Lorem ipsum dolor sit amet, ea vel omittam partiendo, no per case harum possim, graeco oporteat persecuti eos at. Doming rationibus dissentiet mea et. Reque diceret aliquam id sit. In aperiam delenit appellantur duo, tritani antiopam no usu, duo ex commune quaestio iudicabit. Eros facilis at sed, te corpora posidonium vis.
-Eum at fabellas gubergren constituto, mei habeo viderer iuvaret et, labitur iudicabit vix ex. Persecuti abhorreant nam eu, cu pri elit abhorreant. Duo ex mundi facete accusam. Id eum verear incorrupte efficiantur, ea eam atqui virtute, nec contentiones reprehendunt cu. Ius an ornatus splendide, vide expetenda liberavisse in usu. Elit ipsum deserunt at pri, cu qui dicta clita reformidans.
+<h2>Deregulation</h2>
+The Abbott government has recently proposed changes to the higher education system which will
+affect both the tuition fees charged by the ANU as well as the interest rate applied to
+student loans.  In the current system, tuition fees are set at a fixed rate depending on the degree
+and there is no interest applied to student loans.  In the new system, tuition fees are no longer fixed
+and universities may charge any rate as long as it is below the international rate.  In addition, student loans
+will be subject to an interest rate which will be set to the ten year bond rate.
+
+<br>
+<br>
+Simply by choosing the information below, you may compare the cost of an education at
+the ANU under the current system
+and the proposed system.
 </div>
     
 <!--Chart container-->
@@ -33,68 +42,104 @@ Eum at fabellas gubergren constituto, mei habeo viderer iuvaret et, labitur iudi
   <td>After</td>
 </tr>
 <tr>
-  <td>Years Taken</td>
+  <td>Years taken to pay back loan after graduation</td>
   <td><input type="text" id="OldYearsBox" value="" readonly="readonly"></td>
   <td><input type="text" id="NewYearsBox" value="" readonly="readonly"></td>
 </tr>
 <tr>
-  <td>Amount Paid</td>
+  <td>Total cost of education</td>
   <td><input type="text" id="OldPaidBox" value="" readonly="readonly"></td>
   <td><input type="text" id="NewPaidBox" value="" readonly="readonly"></td>
 </tr>
 <tr>
+  <td>Interest paid on the student loan</td>
+  <td><input type="text" id="OldInterestBox" value="" readonly="readonly"></td>
+  <td><input type="text" id="NewInterestBox" value="" readonly="readonly"></td>
+</tr>
 </table>
 
 <!--Input stuff here-->
 <div class="inputs">
     <div class="input-item">
-    <span class="input-label">Degree Band</span>
+    <span class="input-label">Subject area</span>
     <select class="selectpicker" id="DegreeBandSelector">
-    <option value="1">Band 1</option>
-    <option value="2">Band 2</option>
-    <option value="3">Band 3</option>
+    <option value="1">Accounting</option>
+    <option value="2">Administration</option>
+    <!--  <option value="3">Agriculture</option> -->
+    <option value="4">Behavioural Science</option>
+    <!--   <option value="5">Built Environment</option> -->
+    <option value="6">Commerce</option>
+    <option value="7">Computing</option>
+    <!--	<option value="8">Dentistry</option> -->
+    <option value="9">Economics</option>
+    <!--	<option value="10">Education</option> -->
+    <option value="11">Engineering</option>
+    <option value="12">Foreign Languages</option>
+    <!--	<option value="13">Health</option> -->
+    <option value="14">Humanities</option>
+    <option value="15">Law</option>
+    <option value="16">Mathematics</option>
+    <option value="17">Medicine</option>
+    <!--	<option value="18">Nursing</option> -->
+    <option value="19">Science</option>
+    <option value="20">Social Studies</option>
+    <option value="21">Statistics</option>
+    <!--	<option value="22">Surveying</option> -->
+    <!--	<option value="23">Veterinary Science</option> -->
+    <option value="24">Visual and Performing Arts</option>
     </select>
     </div>
 
     <div class="input-item">
-    <span class="input-label">Degree Length</span>
-    <input type="text" id="DegreeLengthSlider" class="slider" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="3">
-    <input type="text" id="DegreeLengthBox" class="sliderValueBox" value="3" readonly="readonly">
+    <span class="input-label">Degree length</span>
+    <input type="text" id="DegreeLengthSlider" class="slider" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="4">
+    <input type="text" id="DegreeLengthBox" class="sliderValueBox" value="4" readonly="readonly">
     </div>
 
     <div class="input-item">
-    <span class="input-label">Inflation Rate</span>
-    <input type="text" id="InflationRateSlider" class="slider" data-slider-min="10" data-slider-max="40" data-slider-step="1" data-slider-value="29">
+    <span class="input-label">Tuition fees as percentage of international rate</span>
+    <input type="text" id="TuitionFeesSlider" class="slider" data-slider-min="0" data-slider-max="1000" data-slider-step="10" data-slider-value="750">
+    <input type="text" id="TuitionFeesBox" class="sliderValueBox" value="75%" readonly="readonly">
+    </div>
+
+    <div class="input-item">
+    <span class="input-label">Inflation rate</span>
+    <input type="text" id="InflationRateSlider" class="slider" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="29">
     <input type="text" id="InflationRateBox" class="sliderValueBox" value="2.9 %" readonly="readonly">
     </div>
 
     <div class="input-item">
-    <span class="input-label">Bond Rate</span>
-    <input type="text" id="BondRateSlider" class="slider" data-slider-min="20" data-slider-max="60" data-slider-step="1" data-slider-value="38">
-    <input type="text" id="BondRateBox" class="sliderValueBox" value="3.8 %" readonly="readonly">
+    <span class="input-label">Interest rate as ten year bond rate</span>
+    <input type="text" id="BondRateSlider" class="slider" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="45">
+    <input type="text" id="BondRateBox" class="sliderValueBox" value="4.5 %" readonly="readonly">
     </div>
 
     <div class="input-item">
-    <span class="input-label">Gap Years</span>
-    <input type="text" id="GapYearSlider" class="slider" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="3">
-    <input type="text" id="GapYearBox" class="sliderValueBox" value="3" readonly="readonly">
+    <span class="input-label">Gap years</span>
+    <input type="text" id="GapYearSlider" class="slider" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="2">
+    <input type="text" id="GapYearBox" class="sliderValueBox" value="2" readonly="readonly">
     </div>
 
     <div class="input-item">
-    <span class="input-label">Starting Salary</span>
-    <input type="text" id="StartingSalarySlider" class="slider" data-slider-min="30" data-slider-max="100" data-slider-step="5" data-slider-value="50">
+    <span class="input-label">Starting salary</span>
+    <input type="text" id="StartingSalarySlider" class="slider" data-slider-min="30" data-slider-max="100" data-slider-step="1" data-slider-value="50">
     <input type="text" id="StartingSalaryBox" class="sliderValueBox" value="$50 K" readonly="readonly">
     </div>
 
     <div class="input-item">
-    <span class="input-label">Salary Increase</span>
+    <span class="input-label">Annual salary increase as percentage</span>
     <input type="text" id="SalaryIncreaseSlider" class="slider" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50">
     <input type="text" id="SalaryIncreaseBox" class="sliderValueBox" value="5.0 %" readonly="readonly">
     </div>
 </div>
 
-<div class="following">Any extra content here?</div>
-<div class="footer">Created by x \\ at the Australian National University \\ 2014</div>
+<div class="following">Click here for the source code of this model <br>
+Click here for a description of how these figures are calculated</div>
+
+<div class="footer">Created by Jarod Alper, Hannah Bull, Joshua Chen, and Angus Griffith  \\ 2014
+<br> The content of this webpage does not represent the official views of the Mathematical Sciences Institute nor the Australian National University.
+</br>
+</div>
 
 <!--Scripts for sliders and chart-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
