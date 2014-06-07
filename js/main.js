@@ -59,9 +59,9 @@ InflationRateSlider.on('slide', function (ev) {
   if (ev.value > BondRateSlider.data('slider').getValue()) {
     // inflation rate can't rise above bond rate
     BondRateSlider.data('slider').setValue(ev.value);
-    $('#BondRateBox').val((ev.value / 10.0).toFixed(1) + " %");
+    $('#BondRateBox')[0].innerHTML = (ev.value / 10.0).toFixed(1) + " %";
   }
-  $('#InflationRateBox').val((ev.value / 10.0).toFixed(1) + " %");
+  $('#InflationRateBox')[0].innerHTML = (ev.value / 10.0).toFixed(1) + " %";
   updateAll();
 });
 
@@ -70,39 +70,39 @@ BondRateSlider.on('slide', function (ev) {
   if (ev.value < InflationRateSlider.data('slider').getValue()) {
     // bond rate can't drop below inflation rate
     InflationRateSlider.data('slider').setValue(ev.value);
-    $('#InflationRateBox').val((ev.value / 10.0).toFixed(1) + " %");
+    $('#InflationRateBox')[0].innerHTML = (ev.value / 10.0).toFixed(1) + " %";
   }
-  $('#BondRateBox').val((ev.value / 10.0).toFixed(1) + " %");
+  $('#BondRateBox')[0].innerHTML = (ev.value / 10.0).toFixed(1) + " %";
   updateAll();
 });
 
 var DegreeLengthSlider = $('#DegreeLengthSlider').slider(sliderOptions);
 DegreeLengthSlider.on('slide', function (ev) {
-  $('#DegreeLengthBox').val(ev.value);
+  $('#DegreeLengthBox')[0].innerHTML = ev.value;
   updateAll();
 });
 
 var TuitionFeesSlider = $('#TuitionFeesSlider').slider(sliderOptions);
 TuitionFeesSlider.on('slide', function (ev) {
-  $('#TuitionFeesBox').val((ev.value / 10.0).toFixed(0) + " %");
+  $('#TuitionFeesBox')[0].innerHTML = (ev.value / 10.0).toFixed(0) + " %";
   updateAll();
 });
 
 var GapYearSlider = $('#GapYearSlider').slider(sliderOptions);
 GapYearSlider.on('slide', function (ev) {
-  $('#GapYearBox').val(ev.value);
+  $('#GapYearBox')[0].innerHTML = ev.value;
   updateAll();
 });
 
 var StartingSalarySlider = $('#StartingSalarySlider').slider(sliderOptions);
 StartingSalarySlider.on('slide', function (ev) {
-  $('#StartingSalaryBox').val("$" + ((ev.value >= 100) ? "" : " ") + ev.value.toString() + " K");
+  $('#StartingSalaryBox')[0].innerHTML = "$" + ((ev.value >= 100) ? "" : " ") + ev.value.toString() + " K";
   updateAll();
 });
 
 var SalaryIncreaseSlider = $('#SalaryIncreaseSlider').slider(sliderOptions);
 SalaryIncreaseSlider.on('slide', function (ev) {
-  $('#SalaryIncreaseBox').val((ev.value / 10.0).toFixed(1) + " %");
+  $('#SalaryIncreaseBox')[0].innerHTML = (ev.value / 10.0).toFixed(1) + " %";
   updateAll();
 });
 

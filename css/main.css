@@ -25,9 +25,12 @@ body {
 
 /* Chart container */
 #container {
+    height: 400px;
+}
+
+.output {
     display: inline-block;
     text-align: center;
-    height: 400px;
     width: 40%;
     min-width: 320px;
     margin-right: 50px;
@@ -66,7 +69,7 @@ body {
     display: inline-block;
     vertical-align: middle;
     text-align: right;
-    width: 30%;
+    width: 40%;
     min-width: 90px;
 }
 
@@ -87,6 +90,6 @@ body {
 .selectpicker {
     display: inline-block;
     vertical-align: middle;
-    width: 82pt;
+    width: 50%;
     margin-left: 15px;
 }

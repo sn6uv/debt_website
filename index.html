@@ -30,19 +30,20 @@ Simply by choosing the information below, you may compare the cost of an educati
 the ANU under the current system
 and the proposed system.
 </div>
-    
+
+<!--Output stuff here-->
+<div class="output">
 <!--Chart container-->
 <div id="container"></div>
-
 <!--Output table-->
-<table class="table table-bordered">
+<table class="output-table table table-bordered">
 <tr>
   <td></td>
   <td>Before</td>
   <td>After</td>
 </tr>
 <tr>
-  <td>Years taken to pay back loan after graduation</td>
+  <td>Years to pay back loan</td>
   <td id="OldYearsBox"></td>
   <td id="NewYearsBox"></td>
 </tr>
@@ -52,17 +53,18 @@ and the proposed system.
   <td id="NewPaidBox"></td>
 </tr>
 <tr>
-  <td>Interest paid on the student loan</td>
+  <td>Interest paid</td>
   <td id="OldInterestBox"></td>
   <td id="NewInterestBox"></td>
 </tr>
 </table>
+</div>
 
 <!--Input stuff here-->
-<div class="inputs">
-    <div class="input-item">
-    <span class="input-label">Subject area</span>
-    <select class="selectpicker" id="DegreeBandSelector">
+<form class="inputs form-horizontal" role="form">
+  <div class="form-group">
+    <label for="DegreeBand" class="input-label control-label">Subject Area</label>
+    <select class="selectpicker form-control" id="DegreeBandSelector">
     <option value="1">Accounting</option>
     <option value="2">Administration</option>
     <!--  <option value="3">Agriculture</option> -->
@@ -88,50 +90,49 @@ and the proposed system.
     <!--	<option value="23">Veterinary Science</option> -->
     <option value="24">Visual and Performing Arts</option>
     </select>
-    </div>
+  </div>
+  <div class="form-group">
+    <label for="DegreeLength" class="input-label control-label">Degree length</label>
+    <input type="text" id="DegreeLengthSlider" class="slider form-control" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="4">
+    <b id=DegreeLengthBox>4</b>
+  </div>
 
-    <div class="input-item">
-    <span class="input-label">Degree length</span>
-    <input type="text" id="DegreeLengthSlider" class="slider" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="4">
-    <input type="text" id="DegreeLengthBox" class="sliderValueBox" value="4" readonly="readonly">
-    </div>
+  <div class="form-group">
+    <label for="TuitionFees" class="input-label control-label">Tuition fees as percentage of international rate</label>
+    <input type="text" id="TuitionFeesSlider" class="slider form-control" data-slider-min="0" data-slider-max="1000" data-slider-step="10" data-slider-value="750">
+    <b id=TuitionFeesBox>75 %</b>
+  </div>
 
-    <div class="input-item">
-    <span class="input-label">Tuition fees as percentage of international rate</span>
-    <input type="text" id="TuitionFeesSlider" class="slider" data-slider-min="0" data-slider-max="1000" data-slider-step="10" data-slider-value="750">
-    <input type="text" id="TuitionFeesBox" class="sliderValueBox" value="75 %" readonly="readonly">
-    </div>
+  <div class="form-group">
+    <label for="InflationRate" class="input-label control-label">Inflation rate</label>
+    <input type="text" id="InflationRateSlider" class="slider form-control" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="29">
+    <b id=InflationRateBox>2.9 %</b>
+  </div>
 
-    <div class="input-item">
-    <span class="input-label">Inflation rate</span>
-    <input type="text" id="InflationRateSlider" class="slider" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="29">
-    <input type="text" id="InflationRateBox" class="sliderValueBox" value="2.9 %" readonly="readonly">
-    </div>
+  <div class="form-group">
+    <label for="BondRate" class="input-label control-label">Interest rate as ten year bond rate</label>
+    <input type="text" id="BondRateSlider" class="slider form-control" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="45">
+    <b id=BondRateBox>4.5 %</b>
+  </div>
 
-    <div class="input-item">
-    <span class="input-label">Interest rate as ten year bond rate</span>
-    <input type="text" id="BondRateSlider" class="slider" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="45">
-    <input type="text" id="BondRateBox" class="sliderValueBox" value="4.5 %" readonly="readonly">
-    </div>
+  <div class="form-group">
+    <label for="GapYears" class="input-label control-label">Gap years</label>
+    <input type="text" id="GapYearSlider" class="slider form-control" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="2">
+    <b id=GapYearBox>2</b>
+  </div>
 
-    <div class="input-item">
-    <span class="input-label">Gap years</span>
-    <input type="text" id="GapYearSlider" class="slider" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="2">
-    <input type="text" id="GapYearBox" class="sliderValueBox" value="2" readonly="readonly">
-    </div>
+  <div class="form-group">
+    <label for="StartingSalary" class="input-label control-label">Starting Salary</label>
+    <input type="text" id="StartingSalarySlider" class="slider form-control" data-slider-min="30" data-slider-max="100" data-slider-step="1" data-slider-value="50">
+    <b id=StartingSalaryBox>$ 50 K</b>
+  </div>
 
-    <div class="input-item">
-    <span class="input-label">Starting salary</span>
-    <input type="text" id="StartingSalarySlider" class="slider" data-slider-min="30" data-slider-max="100" data-slider-step="1" data-slider-value="50">
-    <input type="text" id="StartingSalaryBox" class="sliderValueBox" value="$50 K" readonly="readonly">
-    </div>
-
-    <div class="input-item">
-    <span class="input-label">Annual salary increase as percentage</span>
-    <input type="text" id="SalaryIncreaseSlider" class="slider" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50">
-    <input type="text" id="SalaryIncreaseBox" class="sliderValueBox" value="5.0 %" readonly="readonly">
-    </div>
-</div>
+  <div class="form-group">
+    <label for="SalaryIncrease" class="input-label control-label">Annual salary increase as percentage</label>
+    <input type="text" id="SalaryIncreaseSlider" class="slider form-control" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50">
+    <b id=SalaryIncreaseBox>5.0 %</b>
+  </div>
+</form>
 
 <div class="following">Click here for the source code of this model <br>
 Click here for a description of how these figures are calculated</div>
