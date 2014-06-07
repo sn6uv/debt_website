@@ -69,8 +69,8 @@ body {
     display: inline-block;
     vertical-align: middle;
     text-align: right;
-    width: 40%;
-    min-width: 90px;
+    width: 30%;
+    min-width: 80px;
 }
 
 .slider {

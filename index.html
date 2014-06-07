@@ -60,6 +60,24 @@ and the proposed system.
 </table>
 </div>
 
+<!-- information modals -->
+<div class="modal fade" id="InflationRateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Inflation Rate</h4>
+      </div>
+      <div class="modal-body">
+        body blah
+      </div>
+      <div class="modal-footer">
+        footer blah
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--Input stuff here-->
 <form class="inputs form-horizontal" role="form">
   <div class="form-group">
@@ -107,6 +125,7 @@ and the proposed system.
     <label for="InflationRate" class="input-label control-label">Inflation rate</label>
     <input type="text" id="InflationRateSlider" class="slider form-control" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="29">
     <b id=InflationRateBox>2.9 %</b>
+    <button type="button" class="btn" data-toggle="modal" data-target="#InflationRateModal">?</button>
   </div>
 
   <div class="form-group">
