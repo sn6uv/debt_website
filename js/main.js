@@ -42,7 +42,9 @@ function updateChart(interest, fees) {
 }
 
 /* Setup Selector */
-$('#DegreeBandSelector').click(function () {
+var DegreeBandSelector = $('#DegreeBandSelector');
+DegreeBandSelector.val(20);     // Set default to 'Social Studies'
+DegreeBandSelector.click(function () {
     updateAll();
 });
 
