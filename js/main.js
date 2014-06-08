@@ -28,17 +28,22 @@ var chart = new Highcharts.Chart({
     }
   },
   series: [{
+    name: 'Unpaid debt',
+    data: [0, 0]
+  }, {
     name: 'Interest',
-    data: [0, 40000]
+    data: [0, 0]
   }, {
     name: 'Fees',
-    data: [30000, 100000]
-  }]
+    data: [0, 0]
+  }],
+  colors: ['#f15c80', '#7cb5ec', '#434348'],
 });
 
-function updateChart(interest, fees) {
-  chart.series[0].setData(interest);
-  chart.series[1].setData(fees);
+function updateChart(interest, fees, remaining) {
+  chart.series[0].setData(remaining);
+  chart.series[1].setData(interest);
+  chart.series[2].setData(fees);
 }
 
 /* Setup Selector */
@@ -324,6 +329,7 @@ function updateAll() {
     // debt repayments
     if (income*repaymentRate >= oldDebt) {   // finish paying off loan
       oldPaid += oldDebt/inflationFactor;
+      oldDebt = 0.0;
       break;
     } else {
       oldDebt -= income * repaymentRate;
@@ -333,6 +339,7 @@ function updateAll() {
     income *= (1.0 + salaryIncrease);
     oldYears ++;
   }
+  oldDebt /= inflationFactor;       // remaining debt in today's dollars
 
   var newPaid = 0.0;    // how much is paid under new system (today's dollars)
   var newYears = years+gap;
@@ -376,6 +383,7 @@ function updateAll() {
     // debt repayments
     if (income*repaymentRate > newDebt) {   // finish paying off loan
       newPaid += newDebt/inflationFactor;
+      newDebt = 0.0;
       break;
     } else {
       newDebt -= income*repaymentRate;
@@ -384,6 +392,7 @@ function updateAll() {
     income *= (1.0 + salaryIncrease);
     newYears ++;
   }
+  newDebt /= inflationFactor;       // remaining debt in today's dollars
 
   var oldInterest=0;
   var newInterest = newPaid-newFees;
@@ -399,7 +408,7 @@ function updateAll() {
   $('#NewYearsBox')[0].innerHTML = newYears - years;
   $('#OldYearsBox')[0].innerHTML = oldYears - years;
 
-  updateChart([oldInterest, newInterest], [oldFees, newFees]);
+  updateChart([oldInterest, newInterest], [oldFees, newFees], [oldDebt, newDebt]);
 }
 
 updateAll();
