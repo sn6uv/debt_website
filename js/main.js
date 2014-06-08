@@ -407,6 +407,8 @@ function updateAll() {
   $('#NewInterestBox')[0].innerHTML = "$ " + newInterest.toFixed(0);
   $('#NewYearsBox')[0].innerHTML = newYears - years;
   $('#OldYearsBox')[0].innerHTML = oldYears - years;
+  $('#OldUnpaidBox')[0].innerHTML = "$ " + oldDebt.toFixed(0);
+  $('#NewUnpaidBox')[0].innerHTML = "$ " + newDebt.toFixed(0);
 
   updateChart([oldInterest, newInterest], [oldFees, newFees], [oldDebt, newDebt]);
 }
