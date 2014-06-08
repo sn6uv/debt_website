@@ -43,7 +43,6 @@ function updateChart(interest, fees) {
 
 /* Setup Selector */
 var DegreeBandSelector = $('#DegreeBandSelector');
-DegreeBandSelector.val(20);     // Set default to 'Social Studies'
 DegreeBandSelector.click(function () {
     updateAll();
 });
@@ -131,6 +130,7 @@ function updateAll() {
   var startingSalary = data.StartingSalary;
   var salaryIncrease = data.SalaryIncrease;
   var degree = data.DegreeBand;
+  var tuitionFees = data.TuitionFees;
   var oldDebt = 0.0;    // running debt under old system
   var newDebt = 0.0;    // running debt under new system
 
@@ -261,7 +261,7 @@ function updateAll() {
     internationalFees = 25984;
     break;
   }
-  var newAnnualFees = data.TuitionFees * internationalFees - newContribution * Math.pow(1 + inflation, -2);
+  var newAnnualFees = tuitionFees * internationalFees - newContribution * Math.pow(1 + inflation, -2);
   if (newAnnualFees < 0) {newAnnualFees = 0; }
 
   var oldFees = years * oldAnnualFees;    // total fees paid under old system (today's dollars)
@@ -315,7 +315,7 @@ function updateAll() {
       repaymentRate = 0.080;
     }
 
-    if (oldYears > 80) {  // debt for life
+    if (oldYears >= 50+years) {  // debt for life
       break;
     }
 
@@ -367,7 +367,7 @@ function updateAll() {
       repaymentRate = 0.080;
     }
 
-    if (newYears > 80) {  // debt for life
+    if (newYears >= 50+years) {  // debt for life
       break;
     }
 
@@ -387,6 +387,9 @@ function updateAll() {
 
   var oldInterest=0;
   var newInterest = newPaid-newFees;
+  if (newInterest < 0) {
+    newInterest = 0;
+  }
 
   // Update Table
   $('#OldPaidBox')[0].innerHTML = "$ " + oldPaid.toFixed(0);

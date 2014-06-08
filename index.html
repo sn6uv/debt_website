@@ -8,27 +8,37 @@
 <link href="css/bootstrap.min.css" rel="stylesheet">
 <link href="css/slider.css" rel="stylesheet">
 <link href="css/main.css" rel="stylesheet">
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-51714691-1', 'anu.edu.au');
+  ga('send', 'pageview');
+
+</script>
 </head>
 
 <body>
-<div class="header"> Comparison of the cost of education at the ANU <br>
-before/after deregulation</div>
+<div class="header"> The cost of an ANU degree before/after deregulation</div>
 
+<div id="maincontent">
 <!--Info blurb-->
-<div id="info">
-<h2>Deregulation</h2>
+<div id="info" >
+<h3>Deregulation</h3>
+<p>
 The Abbott government has recently proposed changes to the higher education system which will
 affect both the tuition fees charged by the ANU as well as the interest rate applied to
 student loans.  In the current system, tuition fees are set at a fixed rate depending on the degree
 and there is no interest applied to student loans.  In the new system, tuition fees are no longer fixed
 and universities may charge any rate as long as it is below the international rate.  In addition, student loans
-will be subject to an interest rate which will be set to the ten year bond rate.
-
-<br>
-<br>
-Simply by choosing the information below, you may compare the cost of an education at
-the ANU under the current system
-and the proposed system.
+will be subject to an interest rate which is pegged to the ten-year treasury bond rate.
+</p>
+<p>
+You may compare the cost of an education at the ANU before and after deregulation by choosing values for each of the relevant variables.
+</p>
 </div>
 
 <!--Output stuff here-->
@@ -43,7 +53,7 @@ and the proposed system.
   <td>After</td>
 </tr>
 <tr>
-  <td>Years to pay back loan</td>
+  <td>Years to repay loan after graduation</td>
   <td id="OldYearsBox"></td>
   <td id="NewYearsBox"></td>
 </tr>
@@ -60,28 +70,10 @@ and the proposed system.
 </table>
 </div>
 
-<!-- information modals -->
-<div class="modal fade" id="InflationRateModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Inflation Rate</h4>
-      </div>
-      <div class="modal-body">
-        body blah
-      </div>
-      <div class="modal-footer">
-        footer blah
-      </div>
-    </div>
-  </div>
-</div>
-
 <!--Input stuff here-->
 <form class="inputs form-horizontal" role="form">
   <div class="form-group">
-    <label for="DegreeBand" class="input-label control-label">Subject Area</label>
+    <label for="DegreeBand" class="input-label control-label">Subject area</label>
     <select class="selectpicker form-control" id="DegreeBandSelector">
     <option value="1">Accounting</option>
     <option value="2">Administration</option>
@@ -111,55 +103,233 @@ and the proposed system.
   </div>
   <div class="form-group">
     <label for="DegreeLength" class="input-label control-label">Degree length</label>
+    <button type="button" class="btn" data-toggle="modal" data-target="#DegreeModal">?</button>
     <input type="text" id="DegreeLengthSlider" class="slider form-control" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="4">
     <b id=DegreeLengthBox>4</b>
   </div>
 
   <div class="form-group">
     <label for="TuitionFees" class="input-label control-label">Tuition fees as percentage of international rate</label>
+    <button type="button" class="btn" data-toggle="modal" data-target="#TuitionFeesModal">?</button>
     <input type="text" id="TuitionFeesSlider" class="slider form-control" data-slider-min="0" data-slider-max="1000" data-slider-step="10" data-slider-value="750">
     <b id=TuitionFeesBox>75 %</b>
   </div>
 
   <div class="form-group">
     <label for="InflationRate" class="input-label control-label">Inflation rate</label>
-    <input type="text" id="InflationRateSlider" class="slider form-control" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="29">
-    <b id=InflationRateBox>2.9 %</b>
     <button type="button" class="btn" data-toggle="modal" data-target="#InflationRateModal">?</button>
+    <input type="text" id="InflationRateSlider" class="slider form-control" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="29">
+    <b id=InflationRateBox>2.77 %</b>
   </div>
 
   <div class="form-group">
-    <label for="BondRate" class="input-label control-label">Interest rate as ten year bond rate</label>
+    <label for="BondRate" class="input-label control-label">Interest rate</label>
+    <button type="button" class="btn" data-toggle="modal" data-target="#TreasuryRateModal">?</button>
     <input type="text" id="BondRateSlider" class="slider form-control" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="45">
-    <b id=BondRateBox>4.5 %</b>
+    <b id=BondRateBox>5 %</b>
   </div>
 
   <div class="form-group">
     <label for="GapYears" class="input-label control-label">Gap years</label>
+    <button type="button" class="btn" data-toggle="modal" data-target="#GapYearModal">?</button>
     <input type="text" id="GapYearSlider" class="slider form-control" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="2">
     <b id=GapYearBox>2</b>
   </div>
 
   <div class="form-group">
     <label for="StartingSalary" class="input-label control-label">Starting Salary</label>
+    <button type="button" class="btn" data-toggle="modal" data-target="#StartingSalaryModal">?</button>
     <input type="text" id="StartingSalarySlider" class="slider form-control" data-slider-min="30" data-slider-max="100" data-slider-step="1" data-slider-value="50">
     <b id=StartingSalaryBox>$ 50 K</b>
   </div>
 
   <div class="form-group">
-    <label for="SalaryIncrease" class="input-label control-label">Annual salary increase as percentage</label>
+    <label for="SalaryIncrease" class="input-label control-label">Annual raises as percentage</label>
+    <button type="button" class="btn" data-toggle="modal" data-target="#SalaryIncreaseModal">?</button>
     <input type="text" id="SalaryIncreaseSlider" class="slider form-control" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50">
     <b id=SalaryIncreaseBox>5.0 %</b>
   </div>
 </form>
-
-<div class="following">Click <a href="https://github.com/sn6uv/debt_website">here</a> for the source code of this model <br>
-Click <a href="">here</a> for a description of how these figures are calculated</div>
-
-<div class="footer">Created by Jarod Alper, Hannah Bull, Joshua Chen, and Angus Griffith  \\ 2014
-<br> The content of this webpage does not represent the official views of the Mathematical Sciences Institute nor the Australian National University.
-</br>
 </div>
+
+<div class="following">
+<p>
+Click <a href="https://github.com/sn6uv/debt_website">here</a> for the source code of this model
+</p>
+<p>
+Click <a href="model.pdf">here</a> for a description of how these figures are calculated
+</p>
+</div>
+
+<div class="footer">
+Created by <a href="https://maths-people.anu.edu.au/~alperj/">Jarod Alper</a>, Hannah Bull, Joshua Chen, and Angus Griffith // 2014
+<br />
+The content of this webpage does not represent the official views of the Mathematical Sciences Institute nor the Australian National University.
+</div>
+
+<!-- Information modals -->
+<!--Years-->
+<div class="modal fade bs-example-modal-sm" id="DegreeModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Degree length</h4>
+      </div>
+      <div class="modal-body">
+Choose here the number of years it takes to complete the degree.
+A typical ANU degree takes 3 to 4 years.
+       </div>
+    </div>
+  </div>
+</div>
+
+<!--Tuition fees as % of intl rate -->
+<div class="modal fade bs-example-modal-sm" id="TuitionFeesModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Tuition fees as percentage of international rate</h4>
+      </div>
+      <div class="modal-body">
+In the deregulated system, the domestic tuition fees will increase but are capped
+by the international fees.  Here you can choose the future domestic tuition rate as a
+percentage of the international rate.  The default is set as 75% since Vice Chancellor Ian
+Young suggested in a <a href="http://www.abc.net.au/lateline/content/2014/s4005594.htm">
+recent interview </a> that this percentage would likely be between 70-80%.
+<br>
+<br>
+We should also note that there is a possibility that the
+administration may raise the international tuition fees,
+in which case the total cost of an education would be higher than predicted by this model.
+       </div>
+    </div>
+  </div>
+</div>
+
+<!--Inflation rate-->
+<div class="modal fade bs-example-modal-lg" id="InflationRateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Inflation Rate</h4>
+      </div>
+      <div class="modal-body">
+<p>
+In the current regulated system, student debt is indexed by the inflation rate.
+The default value in this model is set as 2.77% which is
+the 10-year average of the quarterly inflation rates.
+The current
+inflation rate (as of 7 June, 2014) is 2.9%.  The following graphic illustrates
+how the inflation rate has varied since 1969.
+</p>
+<center>
+<img src="inflation.jpg" title="Inflation rate" height="400px" width="800px" />
+</center>
+<p>
+The historical data for the inflation rates was obtained from  <a href="http://www.rba.gov.au/statistics/tables/"> this
+government webpage</a>.  The spreadsheet can be
+ downloaded <a href="http://www.rba.gov.au/statistics/tables/xls/g01hist.xls"> here</a>.
+</p>
+       </div>
+    </div>
+  </div>
+</div>
+
+<!--Interest as 10-yr bond rate-->
+<div class="modal fade bs-example-modal-lg" id="TreasuryRateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Interest Rate</h4>
+      </div>
+      <div class="modal-body">
+<p>
+Under the proposed deregulated system, student debt will accumulate interest.
+This interest rate is determined by
+the <a href="https://www.ato.gov.au/rates/key-superannuation-rates-and-thresholds/?page=34">
+10-year treasury bond rate</a>.    The interest rate will be capped at 6% if the 10-year treasury rate
+exceeds 6%.
+The default value in this model is set as 5.00% which is
+ the 10-year average of the monthly 10-year treasury rates.   The current
+10-year treasury rate (as of 7 June, 2014) is 3.77%.  The following graphic illustrates
+how the 10-year treasury
+rate has varied since 1969 with the red line indicating 6%.
+</p>
+<center>
+<img src="treasurybond.jpg" title="Ten-year treasury rate" height="400px" width="800px" />
+</center>
+<p>
+The historical data for the 10-year treasury rates was obtained from  <a href="http://www.rba.gov.au/statistics/historical-data.html"> this
+government webpage</a>.  The spreadsheets can be
+ downloaded <a href="http://www.rba.gov.au/statistics/tables/xls-hist/f02histhist.xls"> here</a>
+ and <a href="http://www.rba.gov.au/statistics/tables/xls/f02hist.xls"> here</a>.
+</p>
+    </div>
+    </div>
+  </div>
+</div>
+
+<!--Gap years-->
+<div class="modal fade bs-example-modal-sm" id="GapYearModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Gap years</h4>
+      </div>
+      <div class="modal-body">
+Choose here the number of years that elapse before the student begins earning the specified starting salary.
+These gap years could represent years pursuing a graduate degree, years dedicated to volunteer work, or years taken to raise a family.
+       </div>
+    </div>
+  </div>
+</div>
+
+<!--Starting salary-->
+<div class="modal fade bs-example-modal-sm" id="StartingSalaryModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Starting salary</h4>
+      </div>
+      <div class="modal-body">
+<p>
+Choose here a starting salary.  This represents the annual salary that the student
+will make in their first job after uni.
+</p>
+<p>
+  This figure should be entered in today's dollars.  This
+means that if you choose $50,000 as a starting salary and you begin
+earning this salary in the year 2024, you will actually be earning
+50000*(1+inflation)^10 dollars.  For instance, if the inflation rate is 2.77%, your
+actual starting salary will be $65,710 in 2024 dollars.
+</p>
+</div>
+    </div>
+  </div>
+</div>
+
+<!--Annual raises-->
+<div class="modal fade bs-example-modal-sm" id="SalaryIncreaseModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Annual raises as percentage</h4>
+      </div>
+      <div class="modal-body">
+Choose here an annual raise given as a percentage.
+For instance, if you begin earning $50000 in the year 2020 and this annual raise percentage is 5%, then your salary in 2021 is $52500, in 2022 is $55125, and so on.
+       </div>
+    </div>
+  </div>
+</div>
+<!--End info modals-->
 
 <!--Scripts for sliders and chart-->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
