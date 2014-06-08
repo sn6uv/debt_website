@@ -4,7 +4,7 @@ var chart = new Highcharts.Chart({
     type: 'column'
   },
   credits: {enabled: false},
-  title: {text: 'Effect of deregulation'},
+  title: null,
   xAxis: {categories: ['Before', 'After']},
   yAxis: {
     min: 0,
@@ -14,7 +14,7 @@ var chart = new Highcharts.Chart({
     align: 'right',
     x: -70,
     verticalAlign: 'top',
-    y: 20,
+    y: -10,
     floating: true,
     backgroundColor: (Highcharts.theme && Highcharts.theme.background2) || 'white',
     borderColor: '#CCC',
