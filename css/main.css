@@ -75,10 +75,14 @@ body {
 
 .slider {
     display: inline-block;
-    width: 80pt;
     vertical-align: middle;
     margin-left: 15px;
     margin-right: 10px;
+}
+
+.slider.slider-horizontal {
+  width: 100px;
+  height: 20px;
 }
 
 .sliderValueBox {
