@@ -32,7 +32,7 @@
 The Abbott government has recently proposed changes to the higher education system which will
 affect both the tuition fees charged by the ANU as well as the interest rate applied to
 student loans.  In the current system, tuition fees are set at a fixed rate depending on the degree
-and there is no interest applied to student loans.  In the new system, tuition fees are no longer fixed
+and there is no interest applied to student loans.  In the proposed system, tuition fees are no longer fixed
 and universities may charge any rate as long as it is below the international rate.  In addition, student loans
 will be subject to an interest rate which is pegged to the ten-year treasury bond rate.
 </p>
@@ -68,7 +68,9 @@ You may compare the cost of an education at the ANU before and after deregulatio
   <td id="NewInterestBox"></td>
 </tr>
 <tr>
-  <td>Remaining debt upon retirement</td>
+  <td>Remaining debt upon retirement
+      <button type="button" class="btn" data-toggle="modal" data-target="#RemainingDebtModal">?</button>
+  </td>
   <td id="OldUnpaidBox"></td>
   <td id="NewUnpaidBox"></td>
 </tr>
@@ -114,24 +116,24 @@ You may compare the cost of an education at the ANU before and after deregulatio
   </div>
 
   <div class="form-group">
-    <label for="TuitionFees" class="input-label control-label">Tuition fees as percentage of international rate</label>
+    <label for="TuitionFees" class="input-label control-label">Tuition fees will be this % of intl rate minus the commonwealth contribution</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#TuitionFeesModal">?</button>
-    <input type="text" id="TuitionFeesSlider" class="slider form-control" data-slider-min="0" data-slider-max="1000" data-slider-step="10" data-slider-value="750">
+    <input type="text" id="TuitionFeesSlider" class="slider form-control" data-slider-min="250" data-slider-max="1000" data-slider-step="10" data-slider-value="750">
     <b id=TuitionFeesBox>75 %</b>
   </div>
 
   <div class="form-group">
     <label for="InflationRate" class="input-label control-label">Inflation rate</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#InflationRateModal">?</button>
-    <input type="text" id="InflationRateSlider" class="slider form-control" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="28">
-    <b id=InflationRateBox>2.8 %</b>
+    <input type="text" id="InflationRateSlider" class="slider form-control" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="27.7">
+    <b id=InflationRateBox>2.77 %</b>
   </div>
 
   <div class="form-group">
     <label for="BondRate" class="input-label control-label">Interest rate</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#TreasuryRateModal">?</button>
     <input type="text" id="BondRateSlider" class="slider form-control" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="50">
-    <b id=BondRateBox>5.0 %</b>
+    <b id=BondRateBox>5.00 %</b>
   </div>
 
   <div class="form-group">
@@ -142,7 +144,7 @@ You may compare the cost of an education at the ANU before and after deregulatio
   </div>
 
   <div class="form-group">
-    <label for="StartingSalary" class="input-label control-label">Starting Salary</label>
+    <label for="StartingSalary" class="input-label control-label">Starting salary</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#StartingSalaryModal">?</button>
     <input type="text" id="StartingSalarySlider" class="slider form-control" data-slider-min="30" data-slider-max="100" data-slider-step="1" data-slider-value="50">
     <b id=StartingSalaryBox>$ 50 K</b>
@@ -151,8 +153,8 @@ You may compare the cost of an education at the ANU before and after deregulatio
   <div class="form-group">
     <label for="SalaryIncrease" class="input-label control-label">Annual raises as percentage</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#SalaryIncreaseModal">?</button>
-    <input type="text" id="SalaryIncreaseSlider" class="slider form-control" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50">
-    <b id=SalaryIncreaseBox>5.0 %</b>
+    <input type="text" id="SalaryIncreaseSlider" class="slider form-control" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="40">
+    <b id=SalaryIncreaseBox>4.0 %</b>
   </div>
 </form>
 </div>
@@ -190,24 +192,40 @@ A typical ANU degree takes 3 to 4 years.
 </div>
 
 <!--Tuition fees as % of intl rate -->
-<div class="modal fade bs-example-modal-sm" id="TuitionFeesModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog modal-sm">
+<div class="modal fade" id="TuitionFeesModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h4 class="modal-title">Tuition fees as percentage of international rate</h4>
       </div>
       <div class="modal-body">
+<p>
 In the deregulated system, the domestic tuition fees will increase but are capped
-by the international fees.  Here you can choose the future domestic tuition rate as a
-percentage of the international rate.  The default is set as 75% since Vice Chancellor Ian
+by the international fees.  Choose a percentage here for the domestic tuition rate as a
+percentage of the international rate.  As there will be a commonwealth contribution in the
+proposed system, the annual tuition fees that a student will actually be
+responsible for paying are given by
+</p>
+
+<p>
+<center>
+<i>
+(percentage of intl rate)*(current intl tuition fees) - (commonwealth contribution).
+</i>
+</center>
+</p>
+
+<p>
+The default percentage is set as 75% since Vice Chancellor Ian
 Young suggested in a <a href="http://www.abc.net.au/lateline/content/2014/s4005594.htm">
-recent interview </a> that this percentage would likely be between 70-80%.
-<br>
-<br>
+recent interview </a> that this percentage could likely be between 70-80%.
+</p>
+<p>
 We should also note that there is a possibility that the
 administration may raise the international tuition fees,
 in which case the total cost of an education would be higher than predicted by this model.
+</p>
        </div>
     </div>
   </div>
@@ -224,7 +242,7 @@ in which case the total cost of an education would be higher than predicted by t
       <div class="modal-body">
 <p>
 In the current regulated system, student debt is indexed by the inflation rate.
-The default value in this model is set as 2.8% which is
+The default value in this model is set as 2.77% which is
 the 10-year average of the quarterly inflation rates.
 The current
 inflation rate (as of 7 June, 2014) is 2.9%.  The following graphic illustrates
@@ -256,19 +274,19 @@ government webpage</a>.  The spreadsheet can be
 Under the proposed deregulated system, student debt will accumulate interest.
 This interest rate is determined by
 the <a href="https://www.ato.gov.au/rates/key-superannuation-rates-and-thresholds/?page=34">
-10-year treasury bond rate</a>.    The interest rate will be capped at 6% if the 10-year treasury rate
+10-year treasury bond rate</a>.    The interest rate will be capped at 6% if the 10-year treasury bond rate
 exceeds 6%.
 The default value in this model is set as 5.00% which is
- the 10-year average of the monthly 10-year treasury rates.   The current
-10-year treasury rate (as of 7 June, 2014) is 3.77%.  The following graphic illustrates
-how the 10-year treasury
+ the 10-year average of the monthly 10-year treasury bond rates.   The current
+10-year treasury bond rate (as of 7 June, 2014) is 3.77%.  The following graphic illustrates
+how the 10-year treasury bond
 rate has varied since 1969 with the red line indicating 6%.
 </p>
 <center>
-<img src="treasurybond.jpg" title="Ten-year treasury rate" height="400px" width="800px" />
+<img src="treasurybond.jpg" title="Ten-year treasury bond rate" height="400px" width="800px" />
 </center>
 <p>
-The historical data for the 10-year treasury rates was obtained from  <a href="http://www.rba.gov.au/statistics/historical-data.html"> this
+The historical data for the 10-year treasury bond rates was obtained from  <a href="http://www.rba.gov.au/statistics/historical-data.html"> this
 government webpage</a>.  The spreadsheets can be
  downloaded <a href="http://www.rba.gov.au/statistics/tables/xls-hist/f02histhist.xls"> here</a>
  and <a href="http://www.rba.gov.au/statistics/tables/xls/f02hist.xls"> here</a>.
@@ -311,8 +329,8 @@ will make in their first job after uni.
   This figure should be entered in today's dollars.  This
 means that if you choose $50,000 as a starting salary and you begin
 earning this salary in the year 2024, you will actually be earning
-50000*(1+inflation)^10 dollars.  For instance, if the inflation rate is 2.8 %, your
-actual starting salary will be $65,902 in 2024 dollars.
+50000*(1+inflation)^10 dollars.  For instance, if the inflation rate is 2.77%, your
+actual starting salary will be $65,710 in 2024 dollars.
 </p>
 </div>
     </div>
@@ -329,7 +347,26 @@ actual starting salary will be $65,902 in 2024 dollars.
       </div>
       <div class="modal-body">
 Choose here an annual raise given as a percentage.
-For instance, if you begin earning $50000 in the year 2020 and this annual raise percentage is 5%, then your salary in 2021 is $52500, in 2022 is $55125, and so on.
+For instance, if you begin earning $50000 in the year 2020 and this annual raise
+percentage is 5%, then your salary in 2021 is $52500, in 2022 is $55125, and so on.
+       </div>
+    </div>
+  </div>
+</div>
+
+<!--Remaining debt-->
+<div class="modal fade bs-example-modal-sm" id="RemainingDebtModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Remaining debt</h4>
+      </div>
+      <div class="modal-body">
+This model assumes that the student retires 50 years after graduating from the ANU.
+This number reflects the amount of debt remaining on the loan
+when the student retires.  It is shown in red
+in the graph.
        </div>
     </div>
   </div>

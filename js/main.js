@@ -339,7 +339,7 @@ function updateAll() {
     income *= (1.0 + salaryIncrease);
     oldYears ++;
   }
-  oldDebt /= inflationFactor;       // remaining debt in today's dollars
+  oldDebt /= Math.pow(1+inflation,oldYears-1);       // remaining debt in today's dollars
 
   var newPaid = 0.0;    // how much is paid under new system (today's dollars)
   var newYears = years+gap;
@@ -392,7 +392,7 @@ function updateAll() {
     income *= (1.0 + salaryIncrease);
     newYears ++;
   }
-  newDebt /= inflationFactor;       // remaining debt in today's dollars
+  newDebt /= Math.pow(1+inflation,newYears-1);       // remaining debt in today's dollars
 
   var oldInterest=0;
   var newInterest = newPaid-newFees;
