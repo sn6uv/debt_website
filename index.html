@@ -116,24 +116,24 @@ You may compare the cost of an education at the ANU before and after deregulatio
   </div>
 
   <div class="form-group">
-    <label for="TuitionFees" class="input-label control-label">Tuition fees will be this % of intl rate minus the commonwealth contribution</label>
+    <label for="TuitionFees" class="input-label control-label">Tuition fees</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#TuitionFeesModal">?</button>
-    <input type="text" id="TuitionFeesSlider" class="slider form-control" data-slider-min="250" data-slider-max="1000" data-slider-step="10" data-slider-value="750">
-    <b id=TuitionFeesBox>75 %</b>
+    <input type="text" id="TuitionFeesSlider" class="slider form-control" data-slider-min="30" data-slider-max="100" data-slider-step=".1">
+    <b id=TuitionFeesBox></b>
   </div>
 
   <div class="form-group">
     <label for="InflationRate" class="input-label control-label">Inflation rate</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#InflationRateModal">?</button>
-    <input type="text" id="InflationRateSlider" class="slider form-control" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="27.7">
+    <input type="text" id="InflationRateSlider" class="slider form-control" data-slider-min="0" data-slider-max="60" data-slider-step="1" data-slider-value="27.7">
     <b id=InflationRateBox>2.77 %</b>
   </div>
 
   <div class="form-group">
     <label for="BondRate" class="input-label control-label">Interest rate</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#TreasuryRateModal">?</button>
-    <input type="text" id="BondRateSlider" class="slider form-control" data-slider-min="10" data-slider-max="60" data-slider-step="1" data-slider-value="50">
-    <b id=BondRateBox>5.00 %</b>
+    <input type="text" id="BondRateSlider" class="slider form-control" data-slider-min="0" data-slider-max="60" data-slider-step="1" data-slider-value="50">
+    <b id=BondRateBox>5.0 %</b>
   </div>
 
   <div class="form-group">
@@ -153,8 +153,8 @@ You may compare the cost of an education at the ANU before and after deregulatio
   <div class="form-group">
     <label for="SalaryIncrease" class="input-label control-label">Annual raises as percentage</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#SalaryIncreaseModal">?</button>
-    <input type="text" id="SalaryIncreaseSlider" class="slider form-control" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="40">
-    <b id=SalaryIncreaseBox>4.0 %</b>
+    <input type="text" id="SalaryIncreaseSlider" class="slider form-control" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50">
+    <b id=SalaryIncreaseBox>5.0 %</b>
   </div>
 </form>
 </div>
@@ -276,7 +276,7 @@ This interest rate is determined by
 the <a href="https://www.ato.gov.au/rates/key-superannuation-rates-and-thresholds/?page=34">
 10-year treasury bond rate</a>.    The interest rate will be capped at 6% if the 10-year treasury bond rate
 exceeds 6%.
-The default value in this model is set as 5.00% which is
+The default value in this model is set as 5.0% which is
  the 10-year average of the monthly 10-year treasury bond rates.   The current
 10-year treasury bond rate (as of 7 June, 2014) is 3.77%.  The following graphic illustrates
 how the 10-year treasury bond
