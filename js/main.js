@@ -100,68 +100,68 @@ function updateFeesSlider() {
     switch (parseInt(DegreeBandSelector.val())) {
         case 1: 			/*Accounting*/
           min = 10.3 		/*10331*/
-          max = 28.3;		/*30111-1805=28306*/
+          max = 28.4;		/*30111-1705=28406*/
           break;
          case 2:			/*Administration*/
           min = 10.3		/*10331*/
-          max = 28.4;		/*30111-1805=28306*/
-          break; 
+          max = 28.4;		/*30111-1705=28406*/
+          break;
          case 4:			/*Behavioural Science*/
           min = 7.1 		/*7100*/
-          max = 21.1;		/*30111-9033=21078*/
+          max = 21.2;		/*30111-8531=21580*/
           break;
          case 6:			/*Commerce*/
           min = 10.3 		/*10331*/
-          max = 28.3;		/*30111-1805=28306*/
+          max = 28.4;		/*30111-1705=28406*/
           break;
          case 7:			/*Computing*/
           min = 9.7 		/*9669*/
-          max = 21.1;		/*30111-9033=21078*/
-          break; 
+          max = 21.2;		/*30111-8531=21580*/
+          break;
          case 9:			/*Economics*/
           min = 10.3		/*10331*/
-          max = 28.3;		/*30111-1805=28306*/
+          max = 28.4;		/*30111-1705=28406*/
           break;
          case 11:			/*Engineering*/
           min = 14.0 		/*13999*/
-          max = 18.1;		/*30111-12045=18066*/
-          break; 
+          max = 18.7;		/*30111-11376=18735*/
+          break;
          case 12:			/*Foreign Languages*/
           min = 7.1 		/*7100*/
-          max = 13.9;		/*25984-12045=13939*/
+          max = 14.6;		/*25984-11376=14608*/
           break;
          case 14:			/*Humanities*/
           min = 6.5 		/*6458*/
-          max = 20.0;		/*25984-6021=19963*/
-          break; 
+          max = 14.6;		/*25984-5686=14608*/
+          break;
          case 15:			/*Law*/
           min = 10.3		/*10331*/
-          max = 28.3;		/*30111-1805=28306*/
+          max = 28.4;		/*30111-1705=28406*/
           break;
          case 16:			/*Mathematics*/
           min = 6.8 		/*6824*/
-          max = 18.1;		/*30111-12045=18066*/
-          break; 
+          max = 18.7;		/*30111-11376=18735*/
+          break;
          case 17:			/*Medicine*/
           min = 14.3 		/*14295*/
-          max = 12.0;		/*30111-18067=12044*/
+          max = 19.0;		/*30111*1.2-17063 = 19070*/
           break;
          case 19:			/*Science*/
           min = 14.0 		/*13999*/
-          max = 18.1;		/*30111-12045=18066*/
-          break;   
+          max = 18.7;		/*30111-11376=18735*/
+          break;
          case 20:			/*Social Studies*/
           min = 9.9 		/*9945*/
-          max = 24.1;		/*30111-6021=24090*/
-          break; 
+          max = 24.4;		/*30111-5686=24424*/
+          break;
          case 21:			/*Statistics*/
           min = 6.8 		/*6824*/
-          max = 18.1;		/*30111-12045=18066*/
+          max = 18.7;		/*30111-11376=18735*/
           break;
          case 24:			/*Visual and Performing Arts*/
           min = 9.3 		/*9303*/
-          max = 17.0;		/*30111-9033=16951*/
-          break;         
+          max = 17.5;		/*30111-8531=17453*/
+          break;
         default:
           min = 10
           max = 28;
