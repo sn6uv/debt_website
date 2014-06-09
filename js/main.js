@@ -99,7 +99,7 @@ function updateFeesSlider() {
     var min, max;
 
     // TODO fill me with correct values
-    switch (parseInt(DegreeBandSelector.val)) {
+    switch (parseInt(DegreeBandSelector.val())) {
         case 1:
           min = 0
           max = 1000;
