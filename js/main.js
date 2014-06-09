@@ -49,6 +49,7 @@ function updateChart(interest, fees, remaining) {
 /* Setup Selector */
 var DegreeBandSelector = $('#DegreeBandSelector');
 DegreeBandSelector.click(function () {
+    updateFeesSlider();
     updateAll();
 });
 
@@ -93,6 +94,24 @@ TuitionFeesSlider.on('slide', function (ev) {
   $('#TuitionFeesBox')[0].innerHTML = (ev.value / 10.0).toFixed(0) + " %";
   updateAll();
 });
+
+function updateFeesSlider() {
+    var min, max;
+
+    // TODO fill me with correct values
+    switch (parseInt(DegreeBandSelector.val)) {
+        case 1:
+          min = 0
+          max = 1000;
+          break;
+        default:
+          min = 0
+          max = 1000;
+    }
+    TuitionFeesSlider.slider('setAttribute', 'min', min);
+    TuitionFeesSlider.slider('setAttribute', 'max', max);
+    TuitionFeesSlider.slider('setValue', 0.5*(min + max));      // Set value to average
+}
 
 var GapYearSlider = $('#GapYearSlider').slider(sliderOptions);
 GapYearSlider.on('slide', function (ev) {
@@ -413,4 +432,5 @@ function updateAll() {
   updateChart([oldInterest, newInterest], [oldFees, newFees], [oldDebt, newDebt]);
 }
 
+updateFeesSlider();
 updateAll();
