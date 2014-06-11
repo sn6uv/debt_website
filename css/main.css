@@ -23,14 +23,14 @@ body {
     vertical-align: top;
     text-align: left;
     width: 25%;
-    min-width: 320px;
-    margin-right: 20px;
+    min-width: 200px;
+    margin-right: 10px;
     white-space: normal;
 }
 
 /* Chart container */
 #container {
-    height: 400px;
+    height: 250px;
 }
 
 .output {
@@ -47,7 +47,7 @@ body {
     display: inline-block;
     vertical-align: top;
     width: 25%;
-    min-width: 360px;
+    min-width: 450px;
     padding: 15px 0px 0px 30px;
     border: 1pt #ccc solid;
     margin-top: 15px;
