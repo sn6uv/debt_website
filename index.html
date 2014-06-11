@@ -63,7 +63,7 @@ You may compare the cost of an education at the ANU before and after deregulatio
   <td id="NewPaidBox"></td>
 </tr>
 <tr>
-  <td>Interest paid</td>
+  <td>Indexation paid</td>
   <td id="OldInterestBox"></td>
   <td id="NewInterestBox"></td>
 </tr>
@@ -111,16 +111,18 @@ You may compare the cost of an education at the ANU before and after deregulatio
   <div class="form-group">
     <label for="DegreeLength" class="input-label control-label">Degree length</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#DegreeModal">?</button>
-    <input type="text" id="DegreeLengthSlider" class="slider form-control" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="4">
-    <b id=DegreeLengthBox>4</b>
+    <input type="text" id="DegreeLengthSlider" class="slider form-control" data-slider-min="3" data-slider-max="6" data-slider-step="1" data-slider-value="3">
+    <b id=DegreeLengthBox>3</b>
   </div>
 
   <div class="form-group">
-    <label for="TuitionFees" class="input-label control-label">Tuition fees</label>
+    <label for="TuitionFees" class="input-label control-label">Tuition fee increase</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#TuitionFeesModal">?</button>
-    <input type="text" id="TuitionFeesSlider" class="slider form-control" data-slider-min="30" data-slider-max="100" data-slider-step=".1">
-    <b id=TuitionFeesBox></b>
+    <input type="text" id="TuitionFeesSlider" class="slider form-control" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="20">
+    <b id=TuitionFeesBox>20 %</b>
   </div>
+
+  <!-- inflation currently at 2.9%: http://www.rba.gov.au -->
 
   <div class="form-group">
     <label for="InflationRate" class="input-label control-label">Inflation rate</label>
@@ -130,32 +132,45 @@ You may compare the cost of an education at the ANU before and after deregulatio
   </div>
 
   <div class="form-group">
-    <label for="BondRate" class="input-label control-label">Interest rate</label>
+    <label for="BondRate" class="input-label control-label">10Y Bond rate</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#TreasuryRateModal">?</button>
-    <input type="text" id="BondRateSlider" class="slider form-control" data-slider-min="0" data-slider-max="6" data-slider-step="0.1" data-slider-value="5">
-    <b id=BondRateBox>5.0 %</b>
+    <input type="text" id="BondRateSlider" class="slider form-control" data-slider-min="0" data-slider-max="6" data-slider-step="0.1" data-slider-value="3.78">
+    <b id=BondRateBox>3.78 %</b>
   </div>
 
   <div class="form-group">
-    <label for="GapYears" class="input-label control-label">Gap years</label>
+    <label for="GapYears" class="input-label control-label">Unemployed years</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#GapYearModal">?</button>
-    <input type="text" id="GapYearSlider" class="slider form-control" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="2">
-    <b id=GapYearBox>2</b>
+    <input type="text" id="GapYearSlider" class="slider form-control" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="0">
+    <b id=GapYearBox>0</b>
   </div>
+  
+  <!-- Median grad starting salary around $52.5 in 2012: http://www.abs.gov.au/ausstats/abs@.nsf/Lookup/4125.0main+features2320Jan%202013 -->
 
   <div class="form-group">
     <label for="StartingSalary" class="input-label control-label">Starting salary</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#StartingSalaryModal">?</button>
-    <input type="text" id="StartingSalarySlider" class="slider form-control" data-slider-min="30" data-slider-max="100" data-slider-step="1" data-slider-value="50">
-    <b id=StartingSalaryBox>$ 50 K</b>
+    <input type="text" id="StartingSalarySlider" class="slider form-control" data-slider-min="30" data-slider-max="100" data-slider-step="1" data-slider-value="52.5">
+    <b id=StartingSalaryBox>$ 52.5 K</b>
   </div>
+  
+  <!-- Wage price increase tracking around 2.5%: http://www.abs.gov.au/ausstats/abs@.nsf/mf/6345.0/ -->
 
   <div class="form-group">
     <label for="SalaryIncrease" class="input-label control-label">Annual raises as percentage</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#SalaryIncreaseModal">?</button>
-    <input type="text" id="SalaryIncreaseSlider" class="slider form-control" data-slider-min="0" data-slider-max="10" data-slider-step="0.1" data-slider-value="5">
-    <b id=SalaryIncreaseBox>5.0 %</b>
+    <input type="text" id="SalaryIncreaseSlider" class="slider form-control" data-slider-min="0" data-slider-max="10" data-slider-step="0.1" data-slider-value="2.5">
+    <b id=SalaryIncreaseBox>2.5 %</b>
   </div>
+
+  <div class="form-group">
+    <label for="DiscountRate" class="input-label control-label">Discount Rate</label>
+    <button type="button" class="btn" data-toggle="modal" data-target="#DiscountRateModal">?</button>
+    <input type="text" id="DiscountRateSlider" class="slider form-control" data-slider-min="0" data-slider-max="10" data-slider-step="0.1" data-slider-value="0">
+    <b id=DiscountRateBox>0.0 %</b>
+  </div>
+
+
 </form>
 </div>
 
@@ -356,6 +371,22 @@ percentage is 5%, then your salary in 2021 is $52500, in 2022 is $55125, and so 
     </div>
   </div>
 </div>
+
+<!--Discount rate-->
+<div class="modal fade bs-example-modal-sm" id="DiscountRateModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Discount rate</h4>
+      </div>
+      <div class="modal-body">
+Choose here a discount rate given as a percentage. This is used to calculate the present value of the cost of education and of the indexation paid. 
+       </div>
+    </div>
+  </div>
+</div>
+
 
 <!--Remaining debt-->
 <div class="modal fade bs-example-modal-sm" id="RemainingDebtModal" tabindex="-1" role="dialog">

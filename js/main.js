@@ -31,7 +31,7 @@ var chart = new Highcharts.Chart({
     name: 'Unpaid debt',
     data: [0, 0]
   }, {
-    name: 'Interest',
+    name: 'Indexation',
     data: [0, 0]
   }, {
     name: 'Fees',
@@ -63,22 +63,22 @@ var sliderOptions = {
 
 var InflationRateSlider = $('#InflationRateSlider').slider(sliderOptions);
 InflationRateSlider.on('slide', function (ev) {
-  if (ev.value > BondRateSlider.data('slider').getValue()) {
-    // inflation rate can't rise above bond rate
-    BondRateSlider.data('slider').setValue(ev.value);
-    $('#BondRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
-  }
+  //if (ev.value > BondRateSlider.data('slider').getValue()) {
+  //  // inflation rate can't rise above bond rate
+  //  BondRateSlider.data('slider').setValue(ev.value);
+  //  $('#BondRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
+  //}
   $('#InflationRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
   updateAll();
 });
 
 var BondRateSlider = $('#BondRateSlider').slider(sliderOptions);
 BondRateSlider.on('slide', function (ev) {
-  if (ev.value < InflationRateSlider.data('slider').getValue()) {
-    // bond rate can't drop below inflation rate
-    InflationRateSlider.data('slider').setValue(ev.value);
-    $('#InflationRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
-  }
+  //if (ev.value < InflationRateSlider.data('slider').getValue()) {
+  //  // bond rate can't drop below inflation rate
+  //  InflationRateSlider.data('slider').setValue(ev.value);
+  //  $('#InflationRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
+  //}
   $('#BondRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
   updateAll();
 });
@@ -89,9 +89,13 @@ DegreeLengthSlider.on('slide', function (ev) {
   updateAll();
 });
 
+var curFees = 10000;
+var maxFees = 100000;
+
 var TuitionFeesSlider = $('#TuitionFeesSlider').slider(sliderOptions);
 TuitionFeesSlider.on('slide', function (ev) {
-  $('#TuitionFeesBox')[0].innerHTML = "$ " + ev.value.toFixed(0) + " K";
+    var perc = ev.value.toFixed(0);
+    $('#TuitionFeesBox')[0].innerHTML = "" + perc + " %" + " ($" +  Math.min((curFees*(1+perc/100)).toFixed(0), maxFees) + "K p.a.)";
   updateAll();
 });
 
@@ -166,11 +170,15 @@ function updateFeesSlider() {
           min = 10
           max = 28;
     }
-    TuitionFeesSlider.slider('setAttribute', 'min', min);
-    TuitionFeesSlider.slider('setAttribute', 'max', max);
-    var newVal = 0.5 * (min + max);
-    TuitionFeesSlider.slider('setValue', newVal);
-    $('#TuitionFeesBox')[0].innerHTML = "$ " +  newVal.toFixed(0) + " K";
+    curFees = min;
+    maxFees = max;
+
+    var perc = 20;
+
+    TuitionFeesSlider.slider('setAttribute', 'min', -50);
+    TuitionFeesSlider.slider('setAttribute', 'max', 200);
+    TuitionFeesSlider.slider('setValue', perc);
+    $('#TuitionFeesBox')[0].innerHTML = "" + perc + " %" + " ($" +  Math.min((curFees*(1+perc/100)).toFixed(0), maxFees) + "K p.a.)";
 }
 
 var GapYearSlider = $('#GapYearSlider').slider(sliderOptions);
@@ -191,17 +199,53 @@ SalaryIncreaseSlider.on('slide', function (ev) {
   updateAll();
 });
 
+var DiscountRateSlider = $('#DiscountRateSlider').slider(sliderOptions);
+DiscountRateSlider.on('slide', function (ev) {
+  $('#DiscountRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
+  updateAll();
+});
+
+
 function getData() {
   return {
     'InflationRate': InflationRateSlider.data('slider').getValue() / 100.0,
     'BondRate': BondRateSlider.data('slider').getValue() / 100.0,
     'DegreeBand': parseInt($('#DegreeBandSelector').val()),
     'DegreeLength': DegreeLengthSlider.data('slider').getValue(),
-    'TuitionFees': TuitionFeesSlider.data('slider').getValue() * 1000.0,
+    'TuitionFees': Math.min(curFees*(1+TuitionFeesSlider.data('slider').getValue()/100), maxFees) * 1000.0,
     'GapYear': GapYearSlider.data('slider').getValue(),
     'StartingSalary': StartingSalarySlider.data('slider').getValue() * 1000,
     'SalaryIncrease': SalaryIncreaseSlider.data('slider').getValue() / 100.0,
+    'DiscountRate': DiscountRateSlider.data('slider').getValue() / 100.0,
   };
+}
+
+var oldPaid = 0.0;    // how much is paid under old system (today's dollars)
+var oldInterest = 0.0;
+var oldYears;
+var oldDebt = 0.0;    // running debt under old system
+var oldFees = 0.0;
+
+var newPaid = 0.0;    // how much is paid under new system (today's dollars)
+var newInterest = 0.0;
+var newYears;
+var newDebt = 0.0;    // running debt under new system
+var newFees = 0.0;
+
+var years;
+ 
+function update() {
+  // Update Table
+  $('#OldPaidBox')[0].innerHTML = "$ " + oldPaid.toFixed(0);
+  $('#NewPaidBox')[0].innerHTML = "$ " + newPaid.toFixed(0);
+  $('#OldInterestBox')[0].innerHTML = "$ " + oldInterest.toFixed(0);
+  $('#NewInterestBox')[0].innerHTML = "$ " + newInterest.toFixed(0);
+  $('#NewYearsBox')[0].innerHTML = newYears - years;
+  $('#OldYearsBox')[0].innerHTML = oldYears - years;
+  $('#OldUnpaidBox')[0].innerHTML = "$ " + oldDebt.toFixed(0);
+  $('#NewUnpaidBox')[0].innerHTML = "$ " + newDebt.toFixed(0);
+
+  updateChart([oldInterest, newInterest], [oldFees, newFees], [oldDebt, newDebt]);
 }
 
 function updateAll() {
@@ -209,18 +253,31 @@ function updateAll() {
   var data = getData();
   var inflation = data.InflationRate;
   var bondRate = data.BondRate;
-  var years = data.DegreeLength;
   var gap = data.GapYear;
   var startingSalary = data.StartingSalary;
   var salaryIncrease = data.SalaryIncrease;
   var degree = data.DegreeBand;
   var tuitionFees = data.TuitionFees;
-  var oldDebt = 0.0;    // running debt under old system
-  var newDebt = 0.0;    // running debt under new system
+    
+  var thresholdGrowth = 0.0;
+  var tuitionFeeGrowth = 0.0;
+  var discountRate = data.DiscountRate;
+
+  var thresholdGrowthFactor;
+  var discountFactor;
 
   var oldAnnualFees;
   var newContribution;
   var internationalFees;
+
+  oldFees = 0.0;    // total fees paid under old system (today's dollars)
+  oldPaid = 0.0;
+
+  newFees = 0.0;    // total fees paid under new system (today's dollars)
+  newPaid = 0.0;
+  
+
+  years = data.DegreeLength;
 
   // Calculate fees per semester (today's dollars)
   switch (degree) {
@@ -300,18 +357,20 @@ function updateAll() {
 
   newAnnualFees = tuitionFees;
 
-  var oldFees = years * oldAnnualFees;    // total fees paid under old system (today's dollars)
-  var newFees = years * newAnnualFees;    // total fees paid under new system (today's dollars)
-
   /* Stage 1 - Studying */
   for (var i = 1; i <= data.DegreeLength; i++) {
+    discountFactor = Math.pow(1 + discountRate, i-1);
+
     // old system
-    oldDebt = oldDebt*(1 + inflation) + oldAnnualFees * Math.pow(1 + inflation, i - 1);
+    oldFees += oldAnnualFees / discountFactor; // in today dollars
+    oldDebt = oldDebt*(1 + inflation) + oldAnnualFees * Math.pow(1 + tuitionFeeGrowth, i - 1);
 
     // new system
-    newDebt = newDebt*(1 + bondRate) + newAnnualFees * Math.pow(1 + inflation, i - 1);
+    newFees += newAnnualFees / discountFactor; // in today dollars
+    newDebt = newDebt*(1 + bondRate) + newAnnualFees * Math.pow(1 + tuitionFeeGrowth, i - 1);
   }
 
+  console.log(tuitionFees);
 
   /* Stage 2 - Gap Years */
   oldDebt *= Math.pow(1 + inflation, gap);
@@ -320,32 +379,33 @@ function updateAll() {
 
   /* Stage 3 - Working */
   var repaymentRate;
-  var inflationFactor;
 
-  var oldPaid = 0.0;    // how much is paid under old system (today's dollars)
-  var oldYears = years + gap;
-  var income = startingSalary*Math.pow(1 + inflation, oldYears);  // Income adjusted for inflation
+  oldYears = years + gap;
+  var income = startingSalary*Math.pow(1 + salaryIncrease, oldYears);  // Income adjusted for wage increases
+
   /* old system */
   while (true) {
-    inflationFactor = Math.pow(1 + inflation, oldYears);
+    thresholdGrowthFactor = Math.pow(1 + thresholdGrowth, oldYears);
+    discountFactor = Math.pow(1 + discountRate, oldYears);
+
     // calculate repayment
-    if (income < 51309 * inflationFactor) {
+    if (income < 51309 * thresholdGrowthFactor) {
       repaymentRate = 0.000;
-    } else if (income < 57153 * inflationFactor) {
+    } else if (income < 57153 * thresholdGrowthFactor) {
       repaymentRate = 0.040;
-    } else if (income < 62997 * inflationFactor) {
+    } else if (income < 62997 * thresholdGrowthFactor) {
       repaymentRate = 0.045;
-    } else if (income < 66308 * inflationFactor) {
+    } else if (income < 66308 * thresholdGrowthFactor) {
       repaymentRate = 0.050;
-    } else if (income < 71277 * inflationFactor) {
+    } else if (income < 71277 * thresholdGrowthFactor) {
       repaymentRate = 0.055;
-    } else if (income < 77194 * inflationFactor) {
+    } else if (income < 77194 * thresholdGrowthFactor) {
       repaymentRate = 0.060;
-    } else if (income < 81256 * inflationFactor) {
+    } else if (income < 81256 * thresholdGrowthFactor) {
       repaymentRate = 0.065;
-    } else if (income < 89421 * inflationFactor) {
+    } else if (income < 89421 * thresholdGrowthFactor) {
       repaymentRate = 0.070;
-    } else if (income < 95287 * inflationFactor) {
+    } else if (income < 95287 * thresholdGrowthFactor) {
       repaymentRate = 0.075;
     } else {
       repaymentRate = 0.080;
@@ -359,47 +419,47 @@ function updateAll() {
 
     // debt repayments
     if (income*repaymentRate >= oldDebt) {   // finish paying off loan
-      oldPaid += oldDebt/inflationFactor;
+      oldPaid += oldDebt/discountFactor;
       oldDebt = 0.0;
       break;
     } else {
       oldDebt -= income * repaymentRate;
-      oldPaid += income * repaymentRate / inflationFactor;
+      oldPaid += income * repaymentRate / discountFactor;
     }
 
     income *= (1.0 + salaryIncrease);
     oldYears ++;
   }
-  oldDebt /= Math.pow(1+inflation,oldYears-1);       // remaining debt in today's dollars
+  oldDebt /= Math.pow(1+discountRate,oldYears-1);       // remaining debt in today's dollars
 
-  var newPaid = 0.0;    // how much is paid under new system (today's dollars)
-  var newYears = years+gap;
-  var income = startingSalary * Math.pow(1 + inflation, newYears);  // Income adjusted for inflation
-  var new_bracket = 50638 * Math.pow(1 + inflation, -2);
+  newYears = years+gap;
+  var income = startingSalary * Math.pow(1 + salaryIncrease, newYears);  // Income adjusted for wage increase
 
   /* new system */
   while (true) {
     // calculate repayment
-    inflationFactor = Math.pow(1 + inflation, newYears);
-    if (income < new_bracket * inflationFactor) {
+    thresholdGrowthFactor = Math.pow(1 + thresholdGrowth, newYears - 2); // starting in two years
+    discountFactor = Math.pow(1 + discountRate, newYears);
+
+    if (income < 50638 * thresholdGrowthFactor) {
       repaymentRate = 0.000;
-    } else if (income < 51309 * inflationFactor) {
+    } else if (income < 51309 * thresholdGrowthFactor) {
       repaymentRate = 0.020;
-    } else if (income < 57153 * inflationFactor) {
+    } else if (income < 57153 * thresholdGrowthFactor) {
       repaymentRate = 0.040;
-    } else if (income < 62997 * inflationFactor) {
+    } else if (income < 62997 * thresholdGrowthFactor) {
       repaymentRate = 0.045;
-    } else if (income < 66308 * inflationFactor) {
+    } else if (income < 66308 * thresholdGrowthFactor) {
       repaymentRate = 0.050;
-    } else if (income < 71277 * inflationFactor) {
+    } else if (income < 71277 * thresholdGrowthFactor) {
       repaymentRate = 0.055;
-    } else if (income < 77194 * inflationFactor) {
+    } else if (income < 77194 * thresholdGrowthFactor) {
       repaymentRate = 0.060;
-    } else if (income < 81256 * inflationFactor) {
+    } else if (income < 81256 * thresholdGrowthFactor) {
       repaymentRate = 0.065;
-    } else if (income < 89421 * inflationFactor) {
+    } else if (income < 89421 * thresholdGrowthFactor) {
       repaymentRate = 0.070;
-    } else if (income < 95287 * inflationFactor) {
+    } else if (income < 95287 * thresholdGrowthFactor) {
       repaymentRate = 0.075;
     } else {
       repaymentRate = 0.080;
@@ -413,35 +473,26 @@ function updateAll() {
 
     // debt repayments
     if (income*repaymentRate > newDebt) {   // finish paying off loan
-      newPaid += newDebt/inflationFactor;
+      newPaid += newDebt/discountFactor;
       newDebt = 0.0;
       break;
     } else {
       newDebt -= income*repaymentRate;
-      newPaid += income*repaymentRate/inflationFactor;
+      newPaid += income*repaymentRate/discountFactor;
     }
     income *= (1.0 + salaryIncrease);
     newYears ++;
   }
-  newDebt /= Math.pow(1+inflation,newYears-1);       // remaining debt in today's dollars
+  newDebt /= Math.pow(1+discountRate,newYears-1);       // remaining debt in today's dollars
 
-  var oldInterest=0;
-  var newInterest = newPaid-newFees;
+  oldInterest = oldPaid - oldFees;
+
+  newInterest = newPaid - newFees;
   if (newInterest < 0) {
     newInterest = 0;
   }
 
-  // Update Table
-  $('#OldPaidBox')[0].innerHTML = "$ " + oldPaid.toFixed(0);
-  $('#NewPaidBox')[0].innerHTML = "$ " + newPaid.toFixed(0);
-  $('#OldInterestBox')[0].innerHTML = "$ " + oldInterest.toFixed(0);
-  $('#NewInterestBox')[0].innerHTML = "$ " + newInterest.toFixed(0);
-  $('#NewYearsBox')[0].innerHTML = newYears - years;
-  $('#OldYearsBox')[0].innerHTML = oldYears - years;
-  $('#OldUnpaidBox')[0].innerHTML = "$ " + oldDebt.toFixed(0);
-  $('#NewUnpaidBox')[0].innerHTML = "$ " + newDebt.toFixed(0);
-
-  updateChart([oldInterest, newInterest], [oldFees, newFees], [oldDebt, newDebt]);
+  update();
 }
 
 updateFeesSlider();
