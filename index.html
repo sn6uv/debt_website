@@ -22,7 +22,7 @@
 </head>
 
 <body>
-<div class="header"> The cost of an ANU degree before/after deregulation</div>
+<div class="header"> The cost of a university degree before/after deregulation</div>
 
 <div id="maincontent">
 <!--Info blurb-->
@@ -30,14 +30,20 @@
 <h3>Deregulation</h3>
 <p>
 The Abbott government has recently proposed changes to the higher education system which will
-affect both the tuition fees charged by the ANU as well as the interest rate applied to
+affect both the tuition fees charged by universities as well as the interest rate applied to
 student loans.  In the current system, tuition fees are set at a fixed rate depending on the degree
 and there is no interest applied to student loans.  In the proposed system, tuition fees are no longer fixed
 and universities may charge any rate as long as it is below the international rate.  In addition, student loans
 will be subject to an interest rate which is pegged to the ten-year treasury bond rate.
 </p>
 <p>
-You may compare the cost of an education at the ANU before and after deregulation by choosing values for each of the relevant variables.
+You may compare the cost of an education before and after deregulation
+by choosing values for each of the relevant variables.
+</p>
+<p>
+This model is specific to the ANU only in that the
+maximum deregulated tuition fee is computed using the current ANU
+international rates.
 </p>
 </div>
 
@@ -53,23 +59,29 @@ You may compare the cost of an education at the ANU before and after deregulatio
   <td>After</td>
 </tr>
 <tr>
-  <td>Years to repay loan after graduation</td>
+  <td>Years to repay loan after graduation
+      <a href="#" data-toggle="modal" data-target="#YearsTakenModal">[?]</a>
+  </td>
   <td id="OldYearsBox"></td>
   <td id="NewYearsBox"></td>
 </tr>
 <tr>
-  <td>Total cost of education</td>
+  <td>Total cost of education
+      <a href="#" data-toggle="modal" data-target="#TotalPaidModal">[?]</a>
+  </td>
   <td id="OldPaidBox"></td>
   <td id="NewPaidBox"></td>
 </tr>
 <tr>
-  <td>Interest paid</td>
+  <td>Interest paid
+          <a href="#" data-toggle="modal" data-target="#InterestPaidModal">[?]</a>
+  </td>
   <td id="OldInterestBox"></td>
   <td id="NewInterestBox"></td>
 </tr>
 <tr>
   <td>Remaining debt upon retirement
-      <button type="button" class="btn" data-toggle="modal" data-target="#RemainingDebtModal">?</button>
+      <a href="#" data-toggle="modal" data-target="#RemainingDebtModal">[?]</a>
   </td>
   <td id="OldUnpaidBox"></td>
   <td id="NewUnpaidBox"></td>
@@ -98,7 +110,7 @@ You may compare the cost of an education at the ANU before and after deregulatio
     <option value="14">Humanities</option>
     <option value="15">Law</option>
     <option value="16">Mathematics</option>
-    <option value="17">Medicine</option>
+    <!-- <option value="17">Medicine</option> -->
     <!--    <option value="18">Nursing</option> -->
     <option value="19">Science</option>
     <option value="20">Social Studies</option>
@@ -116,7 +128,7 @@ You may compare the cost of an education at the ANU before and after deregulatio
   </div>
 
   <div class="form-group">
-    <label for="TuitionFees" class="input-label control-label">Tuition fees</label>
+    <label for="TuitionFees" class="input-label control-label">Deregulated annual tuition fees</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#TuitionFeesModal">?</button>
     <input type="text" id="TuitionFeesSlider" class="slider form-control" data-slider-min="30" data-slider-max="100" data-slider-step=".1">
     <b id=TuitionFeesBox></b>
@@ -137,7 +149,7 @@ You may compare the cost of an education at the ANU before and after deregulatio
   </div>
 
   <div class="form-group">
-    <label for="GapYears" class="input-label control-label">Gap years</label>
+    <label for="GapYears" class="input-label control-label">Years unemployed</label>
     <button type="button" class="btn" data-toggle="modal" data-target="#GapYearModal">?</button>
     <input type="text" id="GapYearSlider" class="slider form-control" data-slider-min="0" data-slider-max="10" data-slider-step="1" data-slider-value="2">
     <b id=GapYearBox>2</b>
@@ -161,17 +173,20 @@ You may compare the cost of an education at the ANU before and after deregulatio
 
 <div class="following">
 <p>
-Click <a href="https://github.com/sn6uv/debt_website">here</a> for the source code of this model
+Click <a href="model.pdf">here</a> for a description of how these figures are calculated
 </p>
 <p>
-Click <a href="model.pdf">here</a> for a description of how these figures are calculated
+Click <a href="https://github.com/sn6uv/debt_website">here</a> for the source code of this model
 </p>
 </div>
 
 <div class="footer">
-Created by <a href="https://maths-people.anu.edu.au/~alperj/">Jarod Alper</a>, Hannah Bull, Joshua Chen, and Angus Griffith // 2014
+Created by <a href="https://maths-people.anu.edu.au/~alperj/">Jarod Alper</a>, Hannah Bull,
+Joshua Chen, Angus Griffith,
+<a href="https://maths-people.anu.edu.au/~smythd/">David Smyth</a> // 2014
 <br />
 The content of this webpage does not represent the official views of the Mathematical Sciences Institute nor the Australian National University.
+<br />These figures are not an indication of future ANU policy.
 </div>
 
 <!-- Information modals -->
@@ -185,49 +200,62 @@ The content of this webpage does not represent the official views of the Mathema
       </div>
       <div class="modal-body">
 Choose here the number of years it takes to complete the degree.
-A typical ANU degree takes 3 to 4 years.
+A typical university degree takes 3 to 4 years.
        </div>
     </div>
   </div>
 </div>
 
 <!--Tuition fees-->
-<div class="modal fade" id="TuitionFeesModal" tabindex="-1" role="dialog">
-  <div class="modal-dialog">
+<div class="modal fade bs-example-modal-lg" id="TuitionFeesModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Tuition fees</h4>
+        <h4 class="modal-title">Deregulated annual tuition fees</h4>
       </div>
       <div class="modal-body">
 <p>
-In the deregulated system, domestic tuition fees will increase on average in order to
-compensate for the 20% decrease in commonwealth funding.  It is unclear though exactly by
-how much tuition fees will increase.  In our model, you may choose yourself the domestic
-tuition fees.
+While it is impossible to predict how far annual
+tuition fees will rise if deregulation is implemented,
+it is possible to establish likely minimum and maximum values
+for tuition fees within each subject area. In this model, you may select any value between this minimum and maximum.
+The default setting is the average of this minimum and maximum.
 </p>
 
-<p> Depending on the subject area, we have set the minimum domestic tuition fee as the
-tuition fees that would be necessary to compensate for the change in government funding,
-and we have set the maximum fees as the difference between the current international rates and the
-commonwealth contribution.  The default is set as the average of this minimum and
-maximum.</p>
+<p> We have set the minimum within each subject area as current
+domestic fees plus the amount necessary to compensate for the decreased
+government contribution under the proposed deregulation. In the table below,
+these figures are listed in the 5th column entitled "Minimum Student Contribution"
+and are calculated as the sum of the 2nd and 3rd minus the 4th column.
+We have set the maximum within each subject area as the difference
+between current ANU international fees and the government contribution.  Note that
+international fees at the ANU may be higher than at other universities.
+These figures are listed in the 7th column entitled "Maximum Student Contribution"
+and are calculated as the difference of the 6th and 4th column.</p>
+
+<center>
+<img src="table.jpg" title="Commonwealth contributions" height="380px" width="850px" />
+</center>
+<i> Sources: <a href="http://education.gov.au/public-universities">[1]</a>,
+<a href="http://www.innovation.gov.au/highereducation/ResourcesAndPublications/Resources/Documents/Rates2014.pdf">[2]</a>,
+<a href="http://students.anu.edu.au/fees/domestic/csp.php">[3]</a>, and
+<a href="http://students.anu.edu.au/fees/pdfs/ISF-schedule-2014.pdf">[4]</a>.
+</i>
+
+<br>
+<br>
 
 
-<p> We note that while the domestic tuition fees are capped by the difference between the current
-international rate and the commonwealth contribution,
-there is a possibility that the
-administration may raise the international tuition fees,
-in which case the total cost of an education would be higher than predicted by this model.
+<p> Note that while domestic tuition fees are capped by the
+difference between ANU international tuition fees and the government
+contribution, the ANU administration is free to raise international
+tuition fees, in which case the Maximum Student Contribution
+numbers would be higher.
 </p>
 
-<p>
-In medicine, the necessary tuition fees to compensate for the change in government funding
-($14.3 K)
-is actually more than the difference between the current international fees ($30 K)
-and the commonwealth contribution ($18K).  Therefore,  we allowed for the
-possibility of a 20% increase in international tuition fees.
-</p>
+
+
 
        </div>
     </div>
@@ -305,11 +333,11 @@ government webpage</a>.  The spreadsheets can be
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-        <h4 class="modal-title">Gap years</h4>
+        <h4 class="modal-title">Years unemployed</h4>
       </div>
       <div class="modal-body">
 Choose here the number of years that elapse before the student begins earning the specified starting salary.
-These gap years could represent years pursuing a graduate degree, years dedicated to volunteer work, or years taken to raise a family.
+These years could represent years pursuing a graduate degree, years dedicated to volunteer work, or years taken to raise a family.
        </div>
     </div>
   </div>
@@ -357,6 +385,23 @@ percentage is 5%, then your salary in 2021 is $52500, in 2022 is $55125, and so 
   </div>
 </div>
 
+<!--Years taken-->
+<div class="modal fade bs-example-modal-sm" id="YearsTakenModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Years taken to repay the loan</h4>
+      </div>
+      <div class="modal-body">
+This number is the number of years that it takes after
+graduation to repay the loan.  If this number is 50, then
+there is still debt remaining 50 years after graduation.
+      </div>
+    </div>
+  </div>
+</div>
+
 <!--Remaining debt-->
 <div class="modal fade bs-example-modal-sm" id="RemainingDebtModal" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-sm">
@@ -366,14 +411,60 @@ percentage is 5%, then your salary in 2021 is $52500, in 2022 is $55125, and so 
         <h4 class="modal-title">Remaining debt</h4>
       </div>
       <div class="modal-body">
-This model assumes that the student retires 50 years after graduating from the ANU.
-This number reflects the amount of debt remaining on the loan
+This model assumes that the student retires 50 years after graduating from university.
+This number reflects the amount of debt remaining on the loan in today's
+dollars
 when the student retires.  It is shown in red
 in the graph.
        </div>
     </div>
   </div>
 </div>
+
+<!--Interest paid-->
+<div class="modal fade bs-example-modal-sm" id="InterestPaidModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Interest paid</h4>
+      </div>
+      <div class="modal-body">
+This number represents the total amount of interest paid for the education
+in today's dollars.  This number is
+shown in blue in the graph.
+       </div>
+    </div>
+  </div>
+</div>
+
+<!--Paid fees-->
+<div class="modal fade bs-example-modal-sm" id="TotalPaidModal" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Total cost of education</h4>
+      </div>
+      <div class="modal-body">
+<p>
+This number represents the total amount paid for the education including both tuition
+fees and interest.  This number is the sum of the black and
+blue portions of the graph. If the student retires with debt still remaining on the loan, then
+the debt remaining is not included in the total cost of the education.
+</p>
+
+<p>This number is the cost in today's dollars.
+This means that dollar sums for loan payments in future years
+are readjusted with inflation so that they make sense in 2014 dollars.
+For instance, if the inflation rate is 2%, a loan payment of $1000
+in the year 2024 translates to $1000 * (1.02)^(-10) or $820.34 in today's dollars.
+</p>
+       </div>
+    </div>
+  </div>
+</div>
+
 <!--End info modals-->
 
 <!--Scripts for sliders and chart-->

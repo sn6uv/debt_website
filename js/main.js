@@ -99,68 +99,64 @@ function updateFeesSlider() {
     var min, max;
     switch (parseInt(DegreeBandSelector.val())) {
         case 1:             /*Accounting*/
-          min = 10.3         /*10331*/
-          max = 28.4;        /*30111-1705=28406*/
+          min = 10.3
+          max = 28.4;
           break;
          case 2:            /*Administration*/
-          min = 10.3        /*10331*/
-          max = 28.4;        /*30111-1705=28406*/
+          min = 10.3
+          max = 28.4;
           break;
          case 4:            /*Behavioural Science*/
-          min = 7.1         /*7100*/
-          max = 21.2;        /*30111-8531=21580*/
+          min = 7.1
+          max = 21.6;
           break;
          case 6:            /*Commerce*/
-          min = 10.3         /*10331*/
-          max = 28.4;        /*30111-1705=28406*/
+          min = 10.3
+          max = 28.4;
           break;
          case 7:            /*Computing*/
-          min = 9.7         /*9669*/
-          max = 21.2;        /*30111-8531=21580*/
+          min = 9.7
+          max = 21.6;
           break;
          case 9:            /*Economics*/
-          min = 10.3        /*10331*/
-          max = 28.4;        /*30111-1705=28406*/
+          min = 10.3
+          max = 28.4;
           break;
          case 11:            /*Engineering*/
-          min = 14.0         /*13999*/
-          max = 18.7;        /*30111-11376=18735*/
+          min = 14.0
+          max = 18.7;
           break;
          case 12:            /*Foreign Languages*/
-          min = 7.1         /*7100*/
-          max = 14.6;        /*25984-11376=14608*/
+          min = 6.4
+          max = 14.6;
           break;
          case 14:            /*Humanities*/
-          min = 6.5         /*6458*/
-          max = 14.6;        /*25984-5686=14608*/
+          min = 5.8
+          max = 20.3;
           break;
          case 15:            /*Law*/
-          min = 10.3        /*10331*/
-          max = 28.4;        /*30111-1705=28406*/
+          min = 10.3
+          max = 28.4;
           break;
          case 16:            /*Mathematics*/
-          min = 6.8         /*6824*/
-          max = 18.7;        /*30111-11376=18735*/
-          break;
-         case 17:            /*Medicine*/
-          min = 14.3         /*14295*/
-          max = 19.0;        /*30111*1.2-17063 = 19070*/
+          min = 6.8
+          max = 18.7;
           break;
          case 19:            /*Science*/
-          min = 14.0         /*13999*/
-          max = 18.7;        /*30111-11376=18735*/
+          min = 14.0
+          max = 18.7;
           break;
          case 20:            /*Social Studies*/
-          min = 9.9         /*9945*/
-          max = 24.4;        /*30111-5686=24424*/
+          min = 9.9
+          max = 24.4;
           break;
          case 21:            /*Statistics*/
-          min = 6.8         /*6824*/
-          max = 18.7;        /*30111-11376=18735*/
+          min = 6.8
+          max = 18.7;
           break;
          case 24:            /*Visual and Performing Arts*/
-          min = 9.3         /*9303*/
-          max = 17.5;        /*30111-8531=17453*/
+          min = 9.3
+          max = 17.4;
           break;
         default:
           min = 10
@@ -431,6 +427,16 @@ function updateAll() {
     newInterest = 0;
   }
 
+  var oldPaidFees = oldFees;
+  if (oldPaid < oldFees) {
+    oldPaidFees = oldPaid;
+  }
+
+  var newPaidFees = newFees;
+  if (newPaid < newFees) {
+    newPaidFees = newPaid;
+  }
+
   // Update Table
   $('#OldPaidBox')[0].innerHTML = "$ " + oldPaid.toFixed(0);
   $('#NewPaidBox')[0].innerHTML = "$ " + newPaid.toFixed(0);
@@ -441,7 +447,7 @@ function updateAll() {
   $('#OldUnpaidBox')[0].innerHTML = "$ " + oldDebt.toFixed(0);
   $('#NewUnpaidBox')[0].innerHTML = "$ " + newDebt.toFixed(0);
 
-  updateChart([oldInterest, newInterest], [oldFees, newFees], [oldDebt, newDebt]);
+  updateChart([oldInterest, newInterest], [oldPaidFees, newPaidFees], [oldDebt, newDebt]);
 }
 
 updateFeesSlider();
