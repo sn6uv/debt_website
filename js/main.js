@@ -46,6 +46,17 @@ function updateChart(interest, fees, remaining) {
   chart.series[2].setData(fees);
 }
 
+function updateTable(paid, interest, years, debt) {
+  $('#OldPaidBox')[0].innerHTML = "$ " + paid[0].toFixed(0);
+  $('#NewPaidBox')[0].innerHTML = "$ " + paid[1].toFixed(0);
+  $('#OldInterestBox')[0].innerHTML = "$ " + interest[0].toFixed(0);
+  $('#NewInterestBox')[0].innerHTML = "$ " + interest[1].toFixed(0);
+  $('#NewYearsBox')[0].innerHTML = years[0];
+  $('#OldYearsBox')[0].innerHTML = years[1];
+  $('#OldUnpaidBox')[0].innerHTML = "$ " + debt[0].toFixed(0);
+  $('#NewUnpaidBox')[0].innerHTML = "$ " + debt[1].toFixed(0);
+}
+
 /* Setup Selector */
 var DegreeBandSelector = $('#DegreeBandSelector');
 DegreeBandSelector.click(function () {
@@ -427,16 +438,7 @@ function updateAll() {
     newPaidFees = newPaid;
   }
 
-  // Update Table
-  $('#OldPaidBox')[0].innerHTML = "$ " + oldPaid.toFixed(0);
-  $('#NewPaidBox')[0].innerHTML = "$ " + newPaid.toFixed(0);
-  $('#OldInterestBox')[0].innerHTML = "$ " + oldInterest.toFixed(0);
-  $('#NewInterestBox')[0].innerHTML = "$ " + newInterest.toFixed(0);
-  $('#NewYearsBox')[0].innerHTML = newYears - years;
-  $('#OldYearsBox')[0].innerHTML = oldYears - years;
-  $('#OldUnpaidBox')[0].innerHTML = "$ " + oldDebt.toFixed(0);
-  $('#NewUnpaidBox')[0].innerHTML = "$ " + newDebt.toFixed(0);
-
+  updateTable([oldPaid, newPaid], [oldInterest, newInterest], [newYears - years, oldYears - years], [oldDebt, newDebt]);
   updateChart([oldInterest, newInterest], [oldPaidFees, newPaidFees], [oldDebt, newDebt]);
 }
 
