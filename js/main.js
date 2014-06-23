@@ -72,29 +72,41 @@ var sliderOptions = {
   selection: "none"
 };
 
-var InflationRateSlider = $('#InflationRateSlider').slider(sliderOptions);
-InflationRateSlider.on('slide', function (ev) {
+// InflationRate
+function updateInflationRate (ev) {
   $('#InflationRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
   updateAll();
-});
+}
+var InflationRateSlider = $('#InflationRateSlider').slider(sliderOptions);
+InflationRateSlider.on('slide', updateInflationRate);
+InflationRateSlider.on('slideStop', updateInflationRate);
 
-var BondRateSlider = $('#BondRateSlider').slider(sliderOptions);
-BondRateSlider.on('slide', function (ev) {
+// BondRate
+function updateBondRate (ev) {
   $('#BondRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
   updateAll();
-});
+}
+var BondRateSlider = $('#BondRateSlider').slider(sliderOptions);
+BondRateSlider.on('slide', updateBondRate);
+BondRateSlider.on('slideStop', updateBondRate);
 
-var DegreeLengthSlider = $('#DegreeLengthSlider').slider(sliderOptions);
-DegreeLengthSlider.on('slide', function (ev) {
+// DegreeLength
+function updateDegreeLength (ev) {
   $('#DegreeLengthBox')[0].innerHTML = ev.value;
   updateAll();
-});
+}
+var DegreeLengthSlider = $('#DegreeLengthSlider').slider(sliderOptions);
+DegreeLengthSlider.on('slide', updateDegreeLength);
+DegreeLengthSlider.on('slideStop', updateDegreeLength);
 
-var TuitionFeesSlider = $('#TuitionFeesSlider').slider(sliderOptions);
-TuitionFeesSlider.on('slide', function (ev) {
+// TuitionFees
+function updateTuitionFees (ev) {
   $('#TuitionFeesBox')[0].innerHTML = "$ " + ev.value.toFixed(0) + " K";
   updateAll();
-});
+}
+var TuitionFeesSlider = $('#TuitionFeesSlider').slider(sliderOptions);
+TuitionFeesSlider.on('slide', updateTuitionFees);
+TuitionFeesSlider.on('slideStop', updateTuitionFees);
 
 function updateFeesSlider() {
     var min, max;
@@ -170,23 +182,32 @@ function updateFeesSlider() {
     $('#TuitionFeesBox')[0].innerHTML = "$ " +  newVal.toFixed(0) + " K";
 }
 
-var GapYearSlider = $('#GapYearSlider').slider(sliderOptions);
-GapYearSlider.on('slide', function (ev) {
+// GapYear
+function updateGapYear (ev) {
   $('#GapYearBox')[0].innerHTML = ev.value;
   updateAll();
-});
+}
+var GapYearSlider = $('#GapYearSlider').slider(sliderOptions);
+GapYearSlider.on('slide', updateGapYear);
+GapYearSlider.on('slideStop', updateGapYear);
 
-var StartingSalarySlider = $('#StartingSalarySlider').slider(sliderOptions);
-StartingSalarySlider.on('slide', function (ev) {
+// StartingSalary
+function updateStartingSalary (ev) {
   $('#StartingSalaryBox')[0].innerHTML = "$ " + ev.value.toFixed(0) + " K";
   updateAll();
-});
+}
+var StartingSalarySlider = $('#StartingSalarySlider').slider(sliderOptions);
+StartingSalarySlider.on('slide', updateStartingSalary);
+StartingSalarySlider.on('slideStop', updateStartingSalary);
 
-var SalaryIncreaseSlider = $('#SalaryIncreaseSlider').slider(sliderOptions);
-SalaryIncreaseSlider.on('slide', function (ev) {
+// SalaryIncrease
+function updateSalaryIncrease (ev) {
   $('#SalaryIncreaseBox')[0].innerHTML = ev.value.toFixed(1) + " %";
   updateAll();
-});
+}
+var SalaryIncreaseSlider = $('#SalaryIncreaseSlider').slider(sliderOptions);
+SalaryIncreaseSlider.on('slide', updateSalaryIncrease);
+SalaryIncreaseSlider.on('slideStop', updateSalaryIncrease);
 
 function getData() {
   return {
