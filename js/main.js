@@ -41,9 +41,9 @@ var chart = new Highcharts.Chart({
 });
 
 function updateChart(interest, fees, remaining) {
-  chart.series[0].setData(remaining);
-  chart.series[1].setData(interest);
-  chart.series[2].setData(fees);
+  chart.series[0].setData(remaining, false);    // don't redraw
+  chart.series[1].setData(interest, false);     // don't redraw
+  chart.series[2].setData(fees, true);          // redraw
 }
 
 function updateTable(paid, interest, years, debt) {
