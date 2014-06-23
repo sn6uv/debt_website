@@ -22,11 +22,13 @@
 </head>
 
 <body>
-<div class="header"> The cost of a university degree before/after deregulation</div>
+<div class="container">
 
-<div id="maincontent">
+<div class="row" id="header">The cost of a university degree before/after deregulation</div>
+
+<div class="row">
 <!--Info blurb-->
-<div id="info" >
+<div class="col-md-3">
 <h3>Deregulation</h3>
 <p>
 The Abbott government has recently proposed changes to the higher education system which will
@@ -48,7 +50,7 @@ international rates.
 </div>
 
 <!--Output stuff here-->
-<div class="output">
+<div class="col-md-5">
 <!--Chart container-->
 <div id="container"></div>
 <!--Output table-->
@@ -90,7 +92,7 @@ international rates.
 </div>
 
 <!--Input stuff here-->
-<form class="inputs form-horizontal" role="form">
+<form class="form-horizontal col-md-4" id="inputs" role="form">
   <div class="form-group">
     <label for="DegreeBand" class="input-label control-label">Subject area</label>
     <select class="selectpicker form-control" id="DegreeBandSelector">
@@ -171,7 +173,8 @@ international rates.
 </form>
 </div>
 
-<div class="following">
+<div class="row">
+<div class="col-md-4 col-md-offset-4" id="following">
 <p>
 Click <a href="model.pdf">here</a> for a description of how these figures are calculated
 </p>
@@ -179,14 +182,19 @@ Click <a href="model.pdf">here</a> for a description of how these figures are ca
 Click <a href="https://github.com/sn6uv/debt_website">here</a> for the source code of this model
 </p>
 </div>
+</div>
 
-<div class="footer">
+<div class="row">
+<div class="col-md-8 col-md-offset-2" id="footer">
 Created by <a href="https://maths-people.anu.edu.au/~alperj/">Jarod Alper</a>, Hannah Bull,
 Joshua Chen, Angus Griffith,
 <a href="https://maths-people.anu.edu.au/~smythd/">David Smyth</a> // 2014
 <br />
 The content of this webpage does not represent the official views of the Mathematical Sciences Institute nor the Australian National University.
 <br />These figures are not an indication of future ANU policy.
+</div>
+</div>
+
 </div>
 
 <!-- Information modals -->
