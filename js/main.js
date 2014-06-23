@@ -59,7 +59,7 @@ function updateTable(paid, interest, years, debt) {
 
 /* Setup Selector */
 var DegreeBandSelector = $('#DegreeBandSelector');
-DegreeBandSelector.click(function () {
+DegreeBandSelector.change(function () {
     updateFeesSlider();
     updateAll();
 });
