@@ -30,10 +30,6 @@
 }
 
 /* ---- INPUT CONTROL STYLES ---- */
-.input-item {
-    margin-bottom: 5px;
-}
-
 .input-label {
     font-size: 10pt;
     display: inline-block;
@@ -53,12 +49,6 @@
 .slider.slider-horizontal {
   width: 100px;
   height: 20px;
-}
-
-.sliderValueBox {
-    text-align: center;
-    border: 1px solid #000;
-    width: 55px;
 }
 
 .selectpicker {
