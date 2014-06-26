@@ -89,6 +89,11 @@ function updateUnchanged(elementID) {
 // InflationRate
 function updateInflationRate (ev) {
   $('#InflationRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
+  if (ev.value > BondRateSlider.data('slider').getValue()) {
+    // inflation rate can't rise above bond rate
+    BondRateSlider.data('slider').setValue(ev.value);
+    $('#BondRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
+  }
   updateUnchanged('#InflationRateBox');
 }
 var InflationRateSlider = $('#InflationRateSlider').slider(sliderOptions);
@@ -98,6 +103,11 @@ InflationRateSlider.on('slideStop', updateInflationRate);
 // BondRate
 function updateBondRate (ev) {
   $('#BondRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
+  if (ev.value < InflationRateSlider.data('slider').getValue()) {
+    // bond rate can't drop below inflation rate
+    InflationRateSlider.data('slider').setValue(ev.value);
+    $('#InflationRateBox')[0].innerHTML = ev.value.toFixed(1) + " %";
+  }
   updateUnchanged('#BondRateBox');
 }
 var BondRateSlider = $('#BondRateSlider').slider(sliderOptions);
